@@ -10,8 +10,8 @@ pipeline {
     stage ("run") {
       steps {
         echo "run"
-        javac First_java.java
-        java First_java
+        bat 'javac First_java.java'
+        bat 'java First_java'
       }
     }
   }
