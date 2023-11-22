@@ -1,7 +1,7 @@
 pipeline {
   agent any 
   stages {
-    satge ("build") {
+    stage ("build") {
           steps {
             echo "build"
           }
