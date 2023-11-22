@@ -6,7 +6,8 @@ pipeline {
             echo "build"
           }
 
-           }
-           }
+    }
+  }
+}
            
            
