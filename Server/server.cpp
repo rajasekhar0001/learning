@@ -147,7 +147,7 @@ int main() {
         * UDP-IP 
     */
     srv.sin_addr.s_addr = INADDR_ANY;  // means Assigning our own system IP address
-    // inet_addr("127.0.5.65") -> for custom IP 
+    inet_addr("127.0.5.65"); // -> for custom IP 
     memset (srv.sin_zero, 0, 8);  // size of sin_zero member of srv
 
     // setsockopt  -> it should be done before bind()
