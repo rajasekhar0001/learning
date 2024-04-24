@@ -1,10 +1,16 @@
-// Zombie process explanation
+// Zombie process 
+// Explanation
 // Defination: If child process completes its execution earlier than parent process then that
               // that child process is called as Zombie Process
 /**
  * To check the states of processs
  * CMD : ps -elf
+ * zombie process is even completed execution still it will be there in the process table
+ * Waiting for their parent process to retrieve their exit status
+ * But Zombie processes don't consume any active resources like CPU, Memory, etc.
 */
+
+// here we can see that state chenged for the terminated process
 
 #include <iostream>
 #include <stdlib.h>
