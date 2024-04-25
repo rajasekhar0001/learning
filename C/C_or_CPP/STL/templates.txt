@@ -1,0 +1,31 @@
+Templates:
+
+-> A template is a simple yet very powerful tool in C++. The simple idea is to pass the 
+   data type as a parameter so that we don’t need to write the same code for different data types.
+-> typo : typename/class can be used, class is older, to improve readability typename introduced.
+   both can be used interchangably
+-> Templates are expanded at compiler time. This is like macros. The difference is,
+   that the compiler does type-checking before template expansion. The idea is simple, source code 
+   contains only function/class, but compiled code may contain multiple copies of the same 
+   function/class. 
+-> With the help of templates we can write GENERIC FUNCTIONS AND CLASSES
+-> Templates are also an example of Polymorphism
+
+-> Non type paramters:
+
+we must use the expression that is evaluatable at compiler time, which means constat expression
+...........................................................................................
+template<class T, int size> 
+class Myfilebuf
+{
+      T* filepos;
+      static int array[size];
+public:
+      Myfilebuf() { /* ... */ }
+      ~Myfilebuf();
+      advance(); // function defined elsewhere in program
+};
+
+Myfilebuf<double,200> x;
+Myfilebuf<double,10*20> x;
+.....................................................................................................
