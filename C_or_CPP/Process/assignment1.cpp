@@ -23,8 +23,9 @@ int main() {
             perror("fopen");
         else {
             fprintf(fptr, "%d", c_pid);
+            fclose(fptr);
         }
-        sleep(4); // child sleeping
+        sleep(15); // child sleeping
         // char *str = "/proc/";
     }
     else if (ret > 0) {
@@ -32,12 +33,11 @@ int main() {
         cout << "Parent process is running\n";
         string path;
         FILE *fptr = fopen("pid.txt", "r");
-        char *str;
-        sleep(4);
-        fread(str, 5, 1, fptr);
-        printf("c_pid in parent : %s\n", str);
-            // path = "/proc/" + to_string(c_pid) + "/status"; 
-        
+        int str;
+        // sleep(10);
+        fscanf(fptr, "%d", &str);
+        printf("c_pid in parent : %d\n", str);
+        path = "/proc/" + to_string(str) + "/status"; 
         cout << "path : " << path << endl;
     }
     else {

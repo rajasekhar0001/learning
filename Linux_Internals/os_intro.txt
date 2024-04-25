@@ -1,0 +1,33 @@
+Without OS
+Bare metal programming
+-> No OS requirement
+-> need to know everything about the HArd ware to develop an application
+-> Need to use the same kind of configuration to interact with the hardware like RAM, ROM, CPU, timer, 
+  interrupts, etc
+   -> Same task for every basic thing for every application
+       No need to write the same thing, 
+-> That to OS is user friendly
+
+Ex: To work with CLCD, we need hardware interaction related work that will be present in OS, it would be easy
+     with OS
+
+
+
+
+Device driver: A piece of software which will control a particular hardware
+
+Ex: If I insert Pendrive to system, the system should have a USB driver, to work with pendrive
+    Manufacturer will be giving the drivers 
+
+
+-> All embedded systems will not be having OS
+-> For multi tasking based systems need OS
+-> If the application is complex, OS needed
+
+
+Multi tasking -> It does not mean executing multiple tasks at a time  (In case of 1 core )
+   -> IT is like switching between 1 task to other in excuting tasks   
+  --->> WHere sheduling will be done by OS  (Sheduler is part of OS)
+-> Multi tasking is switching between tasks, because switching happens faster, so we call it as multi tasking.
+    -> CPU will be executing tasks
+-> Executing multiple tasks at a time isknown as Concurrent processing

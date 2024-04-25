@@ -1,0 +1,16 @@
+Design patterns in CPP:
+
+   helps developers create maintainable, flexible, and understandable code. This is 
+making it easier for new programmers to follow established best practises.
+
+or 
+in CPP
+is a generic repeatable solution to a frequently occurring prolem in software design 
+that is used in software engineering.
+
+
+There are 3 types of design patterns in CPP:
+
+1) Creational design pattern   (Ex: Singleton method DP, Factory method DP, etc)
+2) Structural design pattern   (ex: Facade method design pattern, etc)
+3) Behavioral design pattern 

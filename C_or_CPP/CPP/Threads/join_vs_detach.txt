@@ -1,0 +1,7 @@
+When you call detach() on a thread, you separate the thread of execution from the thread object.
+
+The detached thread continues running independently, and the thread object is no longer associated with it.
+
+You cannot join a detached thread; it runs in the background.
+
+Use detach() when you want the thread to run independently without blocking the main thread.

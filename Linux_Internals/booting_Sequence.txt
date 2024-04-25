@@ -1,0 +1,46 @@
+Linux Booting Sequence:
+
+Booting of an OS: Loading OS into RAM ( Loading of OS from secondary memory to Primary memory(RAM) )
+-> OS is installed in Hard disk or ROM
+-> the program which ever is executing in the RAM only
+
+Note: Even when we execute a program it will be loaded into RAM then gets executed
+
+
+
+When we turn on system, sequence of steps will be followed to load OS
+
+1. System start up:  
+-> The first software which will be loaded is BIOS (Basic Input Output System)
+     -> run basic test on hardware, Check enough space is there in RAM, Initialize address to the Hardwares
+2. Stage-1 boot loader:  MBR (Master Boot Record)
+   -> Primary task of MBR is to load the stage2 boot loader
+   -> MBR has information about the disk partitions
+3. Stage-2 boot loader: Which will load the OS  (OS loader)
+       -> LILO - LInux LOader    
+       -> GRUB - GRand Unified Bootloader
+     ==> OS loaders, which will load OS kernel into the RAM
+4. Kernel: Linux kernel is loaded    (/boot)
+5. User Aplication:  init -> deamon process, which will do some maintenance task  ( deep in processes chapter)
+
+Q1). WHere BIOS is stored?
+     -> It is stored in a separate chip (near mother board will be having BIOS chip or CMOS chip), BIOS program
+        is stored
+Q2). WHere stage-1 boot loader is stored?
+     -> Stored in the entry point of the Hard disk, entry point is called as "Sector 0"
+Q3) stage-2 boot loader is stored in hard disk in the boot directory
+     ->  /boot/Vmlinuz)
+
+===>> Once OS loaded into the RAM, it will be divided into 2 parts
+    1) OS space  (Kernel space)
+    2) User space (Application running space) 
+
+
+===>>> Once init is executed what happens ?
+   -> 
+
+         main()
+   Boot   ->      Initialization   ->      Operating modules [ Supervisor mode ] -> 
+
+
+
