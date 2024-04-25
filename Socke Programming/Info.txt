@@ -1,0 +1,46 @@
+Socket programming in CPP:
+   refers to the method of communication between two sockets on the network using C++
+   Programming.
+
+--> We use socket API to create a connection between the two programs running on the network, one of which 
+    receives the data by listening to the particular address port, and the other sends the data. Socket programming
+    allows bidirectional programming between the nodes.
+
+What are sockets?
+   A socket is one endpoint of a two-way communication link between two programs running on the network. 
+--------------------------------------------
+==>> Types of sockets
+1. Stream socket (connection oriented like TCP)
+2. Datagram sockets (connection less like UDP)
+
+---------------------------------------------
+Note:
+-->> Endian ness should be considered while doing socket programming
+-->> Host system may be using Little Endian or Big Endian architectures 
+-->> Just like host Network can also using different Endian architectures
+ Ex: Stream Socket (TCP/ IP) based network uses Big Endian Architecture (i.e, Most Significant Byte (MSB) at the Lower Memory address.
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Blocking Socket: (Refer fig: sp_001)
+-> If any client request something to the Server(server socket), client needs to wait until server sends response to client
+    ...> Server may be taking time to process the request.
+
+   ===>>> Until client gets response, all other threads/clients has to wait
+             That's why in most of the cases if we are using Blocking socket, we will be using multi threaded socket, so if any one thread is waiting
+             Other threads can fulfill their requirements (other threads will continue the work)
+Ex: In most of the cases, we will be using one thread is for receiving the requests and other thread is to serve the requests
+
+--------------------------------or-------------------------------
+	A socket is in blocking mode when an I/O call waits for an event to complete. If the blocking mode is set for a socket, the calling program 
+is suspended until the expected event completes.
+
+Note: The default mode of the socket is Blocking ( no need to write code to block again)
+    -> To use non blocking socket we need to write code for that using some system call after socket() call and bind() call
+----------------------------------------------------------------------------------------------
+Non Blocking Socket: (learn in future)
+
+EX : long val = 0;
+     ioctlsocket(socket_descriptor, FIONBIO, &val); // socket_descriptor is return value of socket system call and FIONBIO is macro
+     -> val = 0 // for blocking socket
+     -> val = 1 // for non- blocking socket
+
