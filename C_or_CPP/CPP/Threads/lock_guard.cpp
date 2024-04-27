@@ -22,6 +22,7 @@ void run(string s) {
     lock_guard<mutex> lock(m);  // way to create locked mutex
     // lock is just a object name here
     
+    
     for (int i=0;i< 5;i++)
         cout << s << endl;
 }
