@@ -14,7 +14,8 @@ int main() {
 
     if (mkfifo("myfifo", 0666) == -1) { // to create fifo pipe
         perror("mkfifo");
-        return -1;
+        // printf("mkfifo : %d\n", )
+        // return -1;
     }
     int fd = open("myfifo", O_WRONLY);
     if (fd == -1) 
@@ -25,6 +26,5 @@ int main() {
     write(fd, "Write into a FIFO", 18);
     close(fd);
     printf("Write operation successful\n");
-    
 
 }
