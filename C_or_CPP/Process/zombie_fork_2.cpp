@@ -25,16 +25,15 @@ int main() {
         // child process
         printf("child proces is running\n");
         cout << "Child PID : " << getpid() << "   PPID : " << getppid()<< endl;
-        sleep(2);
+        // sleep(1);
         printf("Child process terminated\n");
     }
     else if (ret > 0) {
         // parent process
         cout << "Parent process is running\n";
         cout << "Parent PID : " << getpid() << "   PPID : " << getppid() << endl;
-        sleep(8);
+        sleep(15);
         cout << "Parent process terminated\n";
-
     }
     else {
         perror("fork");

@@ -24,6 +24,8 @@ int main() {
     }
     
     sleep(10);
+    // while (1) {
+    //    / }
     
     
     printf("Reading completed\n");
