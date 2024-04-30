@@ -1,0 +1,13 @@
+SOLID Design principles:
+Object Oriented Design plays a crucial role when it comes to writing flexible, scalable
+maintainable and reusable code.
+
+-> For good object oriented programming, having knowledge in SOLID principle is really need
+SOLID principle is acronym for five principles
+
+1) Single Responsibility Principle(SRP)
+2) Open/Closed Principle
+3) Liskov's Substitution Principle(LSP)
+4) Interface Segregation Principle(ISP)
+5) Dependency Inversion Principle (DIP)
+

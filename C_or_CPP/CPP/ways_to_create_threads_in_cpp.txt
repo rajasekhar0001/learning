@@ -1,0 +1,137 @@
+Threads in C++: 
+-> 5 ways to create threads using callable functions
+
+Note: if we create multiple threads it does not guarantee which one will start first
+1) Using function pointers
+
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+void fun() {
+    cout << "Inside thread fun\n";
+}
+
+void fun2(string name) {
+    cout << "Inside thread fun2\n";
+    cout << "argument : " << name << endl;
+}
+
+int main() {
+    // try {
+    thread t(fun);
+    thread t2 (fun2, "raja");
+
+    t2.join();
+    t.join();
+    
+    // }
+    // catch (...) {
+    //     cout << "Exception occurred\n";
+    // }
+}
+
+2) Thread creation using Lambda expression
+
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+// void fun(int n) {
+//     while (n--) {
+//         cout << n << endl;
+//     }
+// } 
+
+int main() {
+
+    auto fun = [](int n) {
+        while(n--) {
+            cout << n << endl;
+
+        }
+    };
+
+    thread t(fun, 10);
+
+    // thread t([](int n) {
+    //     while(n--) {
+    //         cout << n << endl;
+
+    //     }
+    // }, 10);
+    t.join();
+}
+
+Nnote:  Commented code can also be used to do the same thing what is
+        being done in the uncommented code.  (3 ways)
+
+3) Thread creation using functor
+
+
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+class Functor {
+    public:
+Functor() {
+    cout << "Constructor craeted" << endl;
+}
+
+    void operator () (int val){     // overloaded operator "()"  -> called as functor
+        cout <<  "thread created  using \"Functor\"  parameter : " << val << endl;
+    }
+};
+
+int main() {
+    Functor();      // just to understand, create an object
+    thread t (Functor(), 2);    // thread creation using functor
+    t.join();
+}
+
+4) Thread creation using non static member function of a class
+
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+class Parent {
+    public:
+    void fun(int x) {
+        while (x-- > 0)
+            cout << x << endl;
+    }
+};
+
+int main() {
+    Parent obj;
+    thread t(&Parent::fun,obj,  5);	// function address, onject of function pointer, paramters
+    t.join();
+}
+
+
+5) Thread creation using static member function
+
+
+#include <iostream>
+#include <thread>
+
+using namespace std;
+
+class Parent {
+    public:
+    static void fun(int x) {
+        while (x-- > 0)
+            cout << x << endl;
+    }
+};
+
+int main() {
+    thread t(&Parent::fun,  5);		// static function pointer , paramters
+    t.join();
+}
