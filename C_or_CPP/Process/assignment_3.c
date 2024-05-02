@@ -1,4 +1,6 @@
 /*
+** Non_block_wait
+
 WAP to avoid a child become zombie with out blocking the parent.
  Pre-requisites:- 
 • Knowledge about system calls, How to read and understand ‘man pages’.

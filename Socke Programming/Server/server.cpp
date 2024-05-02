@@ -167,7 +167,11 @@ int main() {
           within those devices.
         * choose port apart from 0 to 256 because they are reserved
     */
-    int bind_status = bind(serverSocket, (sockaddr*)&srv, sizeof(sockaddr));
+
+    int bind_status = bind(serverSocket, (sockaddr*)&srv, sizeof(sockaddr));    // bind used called as assigning a name to a socket
+    // bind specifies the addr in sockaddr to the socket referred to by socket file descriptor
+    // Usaualy it bind the address to local syatem address 
+
     if (bind_status < 0) {
         cout << "Failed to bind to local port\n";
         exit(0);
