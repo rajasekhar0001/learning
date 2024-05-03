@@ -1,0 +1,8 @@
+-> When you call execvp or execl, the current process image is replaced entirely by the new program. 
+   The old memory map is discarded, including any dynamically allocated buffers.
+-> Here’s why you don’t need to explicitly free memory after using execvp or execl:
+-> The new process image (the program you’re executing) has its own memory space, separate from 
+   the original process.
+-> Any memory allocated in the original process (e.g., using malloc) is no longer accessible or  
+   relevant once the new program starts.
+-> The operating system takes care of cleaning up the old process’s memory
