@@ -32,16 +32,19 @@ int main() {
     int ret = fork();
     if (ret == 0) {
         printf("Child - 1:    PID : %d    PPID: %d\n", getpid(), getppid());
+        sleep(1);
     }
     else if (ret > 0) {
         int ret1 = fork() ;
         if (ret1 == 0) {
-            printf("Child-2:   PID : %d    PPID : %d\n", getpid(), getppid());
+            printf("Child-3:   PID : %d    PPID : %d\n", getpid(), getppid());
+            sleep(1);
         }
         else if (ret1 > 0) {
             int ret2 = fork();
             if (ret2 == 0) {
-                printf("Child -3     PID: %d     PPID : %d\n", getpid(), getppid());
+                printf("Child -2    PID: %d     PPID : %d\n", getpid(), getppid());
+                sleep(1);
             }
             else if (ret2 > 0) {
                 int status;
@@ -58,6 +61,4 @@ int main() {
         }
 
     }
-    
-
 }
