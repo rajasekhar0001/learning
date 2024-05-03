@@ -96,18 +96,19 @@ int main(int argc, char* argv[]) {
                 printf("%s ", cmd[j]);
             }
             printf("\n");
-            close(pipefd1[1]); // Closing the write end of pipe1
+            // close(pipefd1[1]); // Closing the write end of pipe1
             dup2(pipefd1[0], 0);
-            close(pipefd3[0]); // Cosing the read end of pipe2
-            dup2(pipefd3[1], 1);
+            // close(pipefd3[0]); // Cosing the read end of pipe2
+            dup2(pipefd1[1], 1);
             execvp(cmd[0], cmd);
             perror("execvp-2");
         }
         else if (ret2 > 0) {
             int status;
-            sleep(1);
-            // waitpid(ret2, &status, 0);
+            waitpid(ret2, &status, 0);
+            printf("Before\n");
             wait(NULL);
+            printf("After\n");
             int ret3 = fork();
             if (ret3 == 0) {  // Extract command 3
                 // printf("Child 3\n");
@@ -136,13 +137,14 @@ int main(int argc, char* argv[]) {
                 }
                 printf("\n");
                 printf("Done commands\n");
-                close(pipefd3[1]); // Closing the write end of pipe2
-                dup2(pipefd3[0], 0);
+                close(pipefd1[1]); // Closing the write end of pipe2
+                dup2(pipefd1[0], 0);
                 execvp(cmd[0], cmd);
                 perror("execvp-3");
             }
             else if (ret3 > 0) {
-                wait(NULL);
+                int status;
+                waitpid(ret3, &status, 0);
                 printf("Execution completed\n");
             }
         }
