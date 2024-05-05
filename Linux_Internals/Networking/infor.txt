@@ -1,0 +1,15 @@
+Networking:
+
+-> OSI model is not present in reality
+-> OSI model is a reference model
+-> data encapsulation and Decapsulation ( Transmitting and receiving)
+-> To know IP address of system
+    ifconfig
+-> To view the network connectivity of website or IP or website
+	ping <network>
+-> To view the IP address of a Website
+	host <address>
+-> To see all port numbers used in system by opening a file 
+	/etc/services
+-> TCP/IP three way hand shake connection
+   This 3 packets transmission between client and server for the connection status
