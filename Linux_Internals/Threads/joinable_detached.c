@@ -1,4 +1,5 @@
 /**
+ * Thread attribute
  * if attribute (attr) is passed as NULL, the thread will be created with JOINABLE STATE (Default state)
  * 
 */

@@ -22,8 +22,6 @@ void * fun(void *data) {
     // *ret = 100;
  
     // Hackway method
-    
-
     return (void*) (long) d;  // This is Hackway method -> mainly use of casting here
 
     // return ret;
