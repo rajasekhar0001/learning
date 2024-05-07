@@ -47,9 +47,13 @@ Enter M1 rows and columns
 Enter M2 rows and columns
 3  3
 Enter M1 values
-1  2  3  1  1  1  2  2  2
+1  2  3 
+1  1  1  
+2  2  2
 Enter M2 values
-1  2  3  1  2  3  1  2  3
+1  2  3  
+1  2  3  
+1  2  3
 Result is
 14 14 14
 6 6 6
@@ -75,31 +79,36 @@ pthread_mutex_t mutex;
 
 int result[3][3];
 
+long p_tid;
+
 void *mul(void *data) {
 
     Thread_data_t *d = (Thread_data_t*) data;
     // printf("m")
 
-    printf("Working in......\n");
+    // printf("Working in......\n");
 
 
-    for (int i=0;i< 3;i++) {
+    for (int i=0;i< d->m1_row;i++) {
 
         result[d->cur_row][i] = 0;
-        for (int j=0;j<3;j++) {
+        for (int j=0;j<d->m2_col;j++) {
             pthread_mutex_lock(&mutex);
-            result[d->cur_row][i] += (d->matrix1[i][j] * d->matrix2[j][i]);
+            result[d->cur_row][i] += (d->matrix1[d->cur_row][j] * d->matrix2[j][i]);
             pthread_mutex_unlock(&mutex);
         }
         
     }
-    printf("Working end......\n");
+
+    return NULL;
 
 }
 
 int main() {
 
     pthread_mutex_init(&mutex, NULL);
+
+    // allocate the memory for the matrices dynamically 
 
     Thread_data_t obj[3] = {{3, 3, 3, {1, 2, 3, 1, 1, 1,2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2, 3}},
     {3, 3, 3, {1, 2, 3, 1, 1, 1,2, 2, 2}, {1, 2, 3, 1, 2, 3, 1, 2, 3}},
@@ -108,23 +117,22 @@ int main() {
     
     pthread_t tid[3];
 
-    
 
     for (int i=0;i<3; i++) {
         obj[i].cur_row = i;
-        pthread_create(&tid[0], NULL, mul, &obj[i]);
+        pthread_create(&tid[i], NULL, mul, &obj[i]);
     }
     
+    p_tid = tid[2];
+    
 
-    // for (int i=0;i<3;i++) {
-        pthread_join(tid[0], NULL);
-        pthread_join(tid[1], NULL);
-        pthread_join(tid[2], NULL);
-    // }
+    for (int i=0;i<3;i++) {
+        pthread_join(tid[i], NULL);
+    }
     printf("Working.......\n");
 
     for (int i=0;i<3;i++) {
-        for (int j =3;j <3;j++) {
+        for (int j =0;j <3;j++) {
             printf("%d  ", result[i][j]);
         }
         printf("\n");

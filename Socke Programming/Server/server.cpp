@@ -146,7 +146,8 @@ int main() {
         * TCP-IP byte order is -> Big Endian
         * UDP-IP 
     */
-    srv.sin_addr.s_addr = INADDR_ANY;  // means Assigning our own system IP address
+    // srv.sin_addr.s_addr = INADDR_ANY;  // means Assigning our own system IP address
+    srv.sin_addr.s_addr = inet_addr("127.0.5.65");
     inet_addr("127.0.5.65"); // -> for custom IP 
     memset (srv.sin_zero, 0, 8);  // size of sin_zero member of srv
 
