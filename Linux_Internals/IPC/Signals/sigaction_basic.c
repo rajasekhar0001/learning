@@ -22,7 +22,7 @@ int main() {
     sigaction(SIGINT, &act, &old);
 
     while (1) {
-        printf("INside main\n");
+        printf("Inside main\n");
         sleep(1);
     }
 

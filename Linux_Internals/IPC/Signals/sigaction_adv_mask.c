@@ -7,7 +7,7 @@
  * To resolve we use mask member
  * Refere manual page, there are some functions associated with it
  * 
- * man sigaddset -> used to add/ remove specifi signas from 62 into this mask to block current signal
+ * man sigaddset -> used to add/ remove specific signals from 62 into this mask to block current signal
  * In betvween if another signal occurs
  * 
  * If we add all signals, Every signal gets blocked,If any signal arrived until it finishes that signal's action, 
