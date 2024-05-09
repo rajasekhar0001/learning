@@ -45,8 +45,8 @@ int main() {
     int *p =(int *) 0x5676; // Some address which is not belong to this pointer, randomly given 
     *p=10;  // This line causes Segmentation fault error 
 
-    while (1) {     // loop not required
+    // while (1) {     // loop not required
         
-    }
+    // }
 
 }

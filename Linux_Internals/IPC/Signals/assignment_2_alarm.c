@@ -46,14 +46,14 @@ Hints:
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <fcntl.h>
+#include <string.h>
 
-void signal_handler(int signum, siginfo_t *info, void *context) {
-    // siginfo_t structure variable contains the information related to the signal
+int i;
 
-    printf("Segmentation fault... !\n");
-
-    printf("Address %p caused error\n", info->si_addr);
-    exit(0);
+void signal_handler(int signum) {
+    printf("Wake Up Alarm!\n");
+    i=0;    // alarm completed
 
 }
 
@@ -63,36 +63,82 @@ int main(int argc, char* argv[]) {
         printf("No arguments passed\n");
         exit(0);
     }
-    struct sigaction* act, *old;
 
-    act->sa_sigaction = signal_handler;
-    act->sa_flags = SA_SIGINFO;
+    signal(SIGALRM, signal_handler);
 
-    sigaction(SIGALRM, act, NULL);
+    // process given input
+    struct tm dateTime;
+    struct tm *currentTime;
+    memset(&dateTime, 0, sizeof(dateTime));
+    char dateTime_str[255];
 
-    // process time
-    struct tm tm;
-
-    int ret = strptime(argv[1], "%H:%M", &tm);
-
-    struct tm date;
+    time_t current_time;
+    time(&current_time);
+    currentTime = gmtime(&current_time);
+    // printf()
     if (argv[2] != NULL) {
-        strptime(argv[2], "%y/%m", &date);
-        printf("date:  %d/%d/%d\n", date.tm_year, date.tm_mon, date.tm_yday);
+        sprintf(dateTime_str, "%s %s",argv[2], argv[1]);
+        strptime(dateTime_str, "%Y/%m/%d %H:%M:%S", &dateTime);
     }
-    printf("%d  : %d\n", tm.tm_hour, tm.tm_min);
-    if ((tm.tm_hour >= 24 || tm.tm_hour < 0) || (tm.tm_min >= 60 || tm.tm_min <0)) {
-        printf("Error Invalid date\n");
+    else {
+        strptime(argv[1], "%H:%M:%S", &dateTime);
+        dateTime.tm_year = currentTime->tm_year;
+        dateTime.tm_mon = currentTime->tm_mon;
+        dateTime.tm_mday = currentTime->tm_mday;
+    }
+    printf("Curent time -> %d/%d/%d  %d:%d:%d\n", currentTime->tm_year+1900, currentTime->tm_mon+1, currentTime->tm_mday, currentTime->tm_hour, currentTime->tm_min, currentTime->tm_sec);
+    printf("Set Alarm at ->  %d/%d/%d  %d:%d:%d\n", dateTime.tm_year+1900, dateTime.tm_mon+1, dateTime.tm_mday, dateTime.tm_hour, dateTime.tm_min, dateTime.tm_sec);
+    long diffrenceBetweenTimes = mktime(&dateTime) - mktime(currentTime);
+
+
+    // printf("Difference in time in seconds:  %ld\n", diffrenceBetweenTimes);
+    if (diffrenceBetweenTimes < 0) {
+        printf("Choose the future date\n");
+        exit(1);
     }
 
-    long current_time_in_sec = time(NULL);
-
-    if (argv[2] ==NULL) {
-        struct tm *current_time_tm  = gmtime(&current_time_in_sec);
+    printf("Time in seconds in a day: %d\n", 60*60*24);
+    if (diffrenceBetweenTimes < 60*60*24 && dateTime.tm_mday+1 >= currentTime->tm_mday && dateTime.tm_mon >= currentTime->tm_mon && dateTime.tm_year >= currentTime->tm_year ) {
+        printf("Set ALARM for %d:%d:%d today.\n", dateTime.tm_hour, dateTime.tm_min, dateTime.tm_sec);
+    }
+    else
+    {
+        printf("Set alarm at ->  %d:%d:%d  on %d/%d/%d\n", dateTime.tm_hour, dateTime.tm_min, dateTime.tm_sec, dateTime.tm_year + 1900, dateTime.tm_mon + 1, dateTime.tm_mday);
+    }
+    alarm(diffrenceBetweenTimes);
+    i=1;        // alarm set
+    while (i==1) {
     }
 
-    printf("%ld   %ld\n", current_time_in_sec, 0);
-    // while (1) {   
-    
-    // }
+    while (1) {
+        int option;
+        printf("Choose an option: \n1. Snooze    2. Stop\n");
+        scanf("%d", &option);
+        switch(option) {
+            case 1:
+            {
+                int minutes;
+                printf("Enter Snooze time in minutes: ");
+                scanf("%d", &minutes);
+                if (diffrenceBetweenTimes+(minutes*60) < 60 * 60 * 24 && dateTime.tm_mday + 1 >= currentTime->tm_mday && dateTime.tm_mon >= currentTime->tm_mon && dateTime.tm_year >= currentTime->tm_year)
+                {
+                    printf("Set ALARM for %d:%d:%d today.\n", dateTime.tm_hour, dateTime.tm_min, dateTime.tm_sec);
+                }
+                else {
+                    printf("Set alarm at ->  %d:%d:%d  on %d/%d/%d\n", dateTime.tm_hour, dateTime.tm_min, dateTime.tm_sec, dateTime.tm_year+1900, dateTime.tm_mon+1, dateTime.tm_mday);
+                }
+                alarm(minutes*60);  // takes arguments in terms of seconds ( conversion )
+                i = 1;
+                while (i == 1)
+                {
+                }
+                break;
+            }
+            case 2:
+                printf("ALARM stoped\n");
+                exit(1);
+            default: 
+                printf("Enter valid option\n");
+        }
+    }
 }
