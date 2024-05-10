@@ -11,8 +11,16 @@
  * In betvween if another signal occurs
  * 
  * If we add all signals, Every signal gets blocked,If any signal arrived until it finishes that signal's action, 
-   even if another signal arrived it will block, untl earlier signal finishes its execution
- * 
+   even if another signal arrived it will block, until earlier signal finishes its execution
+
+*/
+
+/**
+ * It is not possible to generate signals with different action
+ * So the solution for this is to give the specific signal to that process from another instance of 
+   command prompt using the command
+ *    --->>  kill -<Signal Number> <PID>
+ *       Ex: kill -SIGINT  <PID>
 */
 
 #include <stdio.h>
@@ -43,6 +51,8 @@ int main() {
     // whatever signals we add into this set those signals get blocked when signal which is not in this set arrived
     // Here SIGTSTP gets blocked if some other signal comes, even it is occurred or it is running
     
+
+    //IMP
     
     sigaction(SIGINT, &act, &old);
     sigaction(SIGTSTP, &act, &old);

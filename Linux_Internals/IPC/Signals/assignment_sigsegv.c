@@ -30,7 +30,6 @@ void signal_handler(int signum, siginfo_t *info, void *context) {
 
     printf("Address %p caused error\n", info->si_addr);
     exit(0);
-
 }
 
 int main() {
@@ -45,8 +44,8 @@ int main() {
     int *p =(int *) 0x5676; // Some address which is not belong to this pointer, randomly given 
     *p=10;  // This line causes Segmentation fault error 
 
-    // while (1) {     // loop not required
+    while (1) {     // loop not required
         
-    // }
+    }
 
 }
