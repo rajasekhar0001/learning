@@ -35,7 +35,7 @@ int main() {
 
     send(read_fd, "First client socket", 40, 0);
 
-    printf("DOne successfully\n");
+    printf("Done successfully\n");
     while (1);
 
 }
