@@ -1,0 +1,2 @@
+Hello Raja
+After reasssigning the duplicated  stdout file descriptor
