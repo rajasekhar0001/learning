@@ -1,0 +1,14 @@
+IPC using Message Queues:
+-> 4 important functions here are
+    
+	msgget() -> used to create a message queue  
+                  -> need to use in server and client  -> it returns message_queue_id
+ 
+        msgsnd() ->To add message to m  essage queue
+                  -> returns '0' if it successfully sends
+ 
+        msgrcv() -> to retrieve message from message queue
+                  -> returns length of the message which it is received
+                   
+        msgctl() -> The control funciton (like to delete a message queue)
+                  -> depends on Macros we use
