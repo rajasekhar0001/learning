@@ -1,0 +1,44 @@
+Start testing: Aug 03 23:20 IST
+----------------------------------------------------------
+1/1 Testing: runTests
+1/1 Test: runTests
+Command: "/mnt/e/Learning Space/UTS_CPP/build/runTests"
+Directory: /mnt/e/Learning Space/UTS_CPP/build
+"runTests" start time: Aug 03 23:20 IST
+Output:
+----------------------------------------------------------
+[==========] Running 3 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from SampleTest
+[ RUN      ] SampleTest.Test1
+[       OK ] SampleTest.Test1 (0 ms)
+[ RUN      ] SampleTest.Test2
+/mnt/e/Learning Space/UTS_CPP/tests/test_main.cpp:8: Failure
+Expected equality of these values:
+  1
+  2
+
+[  FAILED  ] SampleTest.Test2 (0 ms)
+[----------] 2 tests from SampleTest (0 ms total)
+
+[----------] 1 test from SampleTest2
+[ RUN      ] SampleTest2.Test1
+[       OK ] SampleTest2.Test1 (0 ms)
+[----------] 1 test from SampleTest2 (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] SampleTest.Test2
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Failed.
+"runTests" end time: Aug 03 23:20 IST
+"runTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 03 23:20 IST
