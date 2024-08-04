@@ -1,3 +1,2 @@
-runTests 0 0
+runTests 9 0.00963964
 ---
-runTests
