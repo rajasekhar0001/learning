@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/UTS_CPP.dir/src/main.cpp.o -o UTS_CPP  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a 

@@ -1,0 +1,24 @@
+The benefit of using google test is 
+
+1. Google Test is based on xUnit Architecture 
+2. Portable and works on Linux, Mac and Windows
+
+The video also details about the type of assertion being made available as part of Google Test which are
+
+1. Assertion for Success Scenarios
+Assertions in Failure scenarios
+2. Assertion to generate Non Fatal Failures -> Expect_EQ()
+  Ex: In particular test case, the lines after ASSERTION executes even it fails
+3. Assertions to generate Fatal Failures  -> ASSERT_EQ()
+  Ex: In particular test case, the lines after ASSERTION will not be executed if it fails
+
+==> TO compile
+g++ basics_and_Assertions.cpp -lgtest -lgtest_main -pthread
+
+==> To execute and to see report
+./a.out
+
+
+Test case: A test case is ont which is used to test specific scenario (only one)
+
+Test Suite: A test suite is bunch of test cases grouped togethe, which are related to a specific feature or function
