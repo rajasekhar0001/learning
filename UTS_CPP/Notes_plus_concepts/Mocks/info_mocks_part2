@@ -1,0 +1,23 @@
+Using Google Mock Part-2:
+
+1) Mocking without deriving from a class:
+
+	Mock classes can be used without deriving from the Original class.
+
+2) Invoking Original and Other Implementations:
+	Use namespace -> ::testing::Invoke	
+
+	 If we call mocked method, it will not be called actually. TRy by placing some printf()
+	--> To call original imeplementation 
+	EXPECT_CALL(mdb, fun()).Times(1)
+	.WillOnce(Invoke(&obj , &funcion_name);	
+
+	// Inplace of function_name in Invoke(), some other function can be places which can be any, that will be called. Try with function with
+           some print statements.
+
+3) Setting DEfault actions:
+	-> Using nmaespace -> ::testing::DoDefault  [ using EXPECT_CALL with ON_CALL ]
+
+4) Performing multiple actions:
+	
+	.WillOnce(DoAll(Invoke(&obj, &fun_name), Invoke(&obj, &fun_name));  -> Only last Invoke should return not the eother
