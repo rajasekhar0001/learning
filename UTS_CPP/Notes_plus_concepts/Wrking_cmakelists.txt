@@ -1,0 +1,59 @@
+cmake_minimum_required(VERSION 3.15.0)
+project(Project_Basic)
+
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Enable testing
+enable_testing()
+
+# Add GoogleTest
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/release-1.11.0.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+# Set coverage excludes
+set(COVERAGE_EXCLUDES '/usr/*' '/usr/include/*' '*.h' './build/*' )
+
+# Add the source files
+add_executable(my_test 
+./testscripts/main_test.cpp 
+./testscripts/mock_arithmetic_operations.cpp 
+./testscripts/mock_division.cpp)
+
+# Link GoogleTest libraries
+target_link_libraries(my_test gtest gmock gtest_main pthread gcov)
+
+# Add compile options for coverage
+target_compile_options(my_test PRIVATE -fprofile-arcs -ftest-coverage)
+
+# Add the test
+add_test(NAME my_test COMMAND my_test)
+
+# Generate coverage report
+find_program(LCOV_PATH lcov)
+find_program(GENHTML_PATH genhtml)
+
+if(LCOV_PATH AND GENHTML_PATH)
+  add_custom_target(clean_coverage
+    COMMAND find . -name "*.gcda" -delete
+  )
+
+  add_custom_target(run_tests
+    COMMAND my_test
+    DEPENDS my_test clean_coverage
+  )
+
+  add_custom_target(coverage
+    COMMAND ${LCOV_PATH} --capture --directory . --output-file coverage.info --rc lcov_branch_coverage=1
+    COMMAND ${LCOV_PATH} --remove coverage.info ${COVERAGE_EXCLUDES} --output-file coverage_filtered.info --rc lcov_branch_coverage=1
+    COMMAND ${GENHTML_PATH} coverage_filtered.info --output-directory coverage --branch-coverage 
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  )
+else()
+  message(FATAL_ERROR "lcov and/or genhtml not found. Please install them and ensure they are in your PATH.")
+endif()
