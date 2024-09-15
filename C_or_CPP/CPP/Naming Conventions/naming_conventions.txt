@@ -1,0 +1,35 @@
+Private and Protected members
+- Many styles prefix private or protected members with an underscore or m_ to distinguish them from public members or method parameters.
+ Example: _privateData, m_privateData
+
+Camel Case (Lower Camel Case)
+- local variables, function parameters, function names
+  Ex: myVariable
+  Ex: calculateArea()
+
+Pascal Case (Upper Camel Case):
+- Class nemes, 
+ Ex: Student, LinkedList, Node
+- Prefix or Suffix for Interfaces/Abstract Classes:  Some C++ conventions involve prefixing interfaces or abstract base classes with I or suffixing with Base.
+  Ex: IShape, ShapeBase
+- Enum values can be written in all uppercase or Pascal case, depending on preference.
+ Ex: enum Status { SUCCESS, FAILURE };
+ Ex: enum Status { Success, Failure };
+ - Tenplete parameter naming
+  template <typename KeyType, typename ValueType>
+
+Snake Case
+- Sometimes used for constants, global variables, or older C-style code
+- global variables
+ Ex: my_variable_name, total_count
+
+- Prefix for Member Variables: Many C++ developers use an underscore (_) or m_ prefix to indicate private or member variables.
+ Example: _count, m_count
+
+
+Upper Snake Case
+- const varaibels, macros and constepr variables
+  Ex: MAX_BUFFER_SIZE, DEFAULT_TIMEOUT
+- File and Header Guard Naming: Header guards are written in uppercase, using underscores to separate parts of the name.
+ Ex: #ifndef MY_PROJECT_MY_HEADER_H, #define MY_PROJECT_MY_HEADER_H
+  
