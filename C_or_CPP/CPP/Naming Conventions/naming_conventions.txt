@@ -32,4 +32,12 @@ Upper Snake Case
   Ex: MAX_BUFFER_SIZE, DEFAULT_TIMEOUT
 - File and Header Guard Naming: Header guards are written in uppercase, using underscores to separate parts of the name.
  Ex: #ifndef MY_PROJECT_MY_HEADER_H, #define MY_PROJECT_MY_HEADER_H
+
+
+ Namespace naming conventions
+ - Ex: using namespace std;
+   Ex: using namespace game;
+   Ex: namespace game {
+     int a;
+   }
   
