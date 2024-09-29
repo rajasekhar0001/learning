@@ -1,4 +1,5 @@
 /**
+ * TEMPLATE SPECIALIZATION since the default template won't work for c-style char*
  * If there is need to compare C-style string with template
  * There will be issue in using that, since C-strings can't be compared with operators
  * REquires function like strcmp
