@@ -1,0 +1,105 @@
+Smart pointers in C++ are a part of the C++ Standard Library and provide automatic memory management to prevent memory leaks and dangling pointers. They are implemented as template classes and manage the lifetime of dynamically allocated objects. Unlike raw pointers, smart pointers automatically deallocate memory when the object they point to is no longer needed.
+
+Types of Smart Pointers:
+std::unique_ptr
+std::shared_ptr
+std::weak_ptr
+These are found in the <memory> header.
+
+1. std::unique_ptr
+Ownership: A unique_ptr holds exclusive ownership of an object. Only one unique_ptr can point to a given resource at a time.
+Transfer Ownership: Ownership can be transferred to another unique_ptr (using std::move), but two unique_ptr instances can't own the same object.
+Automatic Deletion: When the unique_ptr goes out of scope, the object it manages is automatically destroyed.
+Example:
+cpp
+Copy code
+#include <iostream>
+#include <memory> // for std::unique_ptr
+
+class MyClass {
+public:
+    MyClass() { std::cout << "Constructor\n"; }
+    ~MyClass() { std::cout << "Destructor\n"; }
+};
+
+int main() {
+    std::unique_ptr<MyClass> ptr1 = std::make_unique<MyClass>(); // create unique_ptr
+    // std::unique_ptr<MyClass> ptr2 = ptr1;  // This would be a compilation error
+    std::unique_ptr<MyClass> ptr2 = std::move(ptr1); // Ownership transferred to ptr2
+
+    if (!ptr1) {
+        std::cout << "ptr1 is null\n"; // ptr1 is now null after moving ownership
+    }
+} // ptr2 goes out of scope, so the destructor of MyClass is called
+When to use:
+When you want sole ownership of a resource, and you don’t want it to be shared with others.
+This is a good replacement for new and delete.
+2. std::shared_ptr
+Ownership: A shared_ptr maintains shared ownership of an object. Multiple shared_ptr instances can point to the same resource.
+Reference Counting: Internally, it uses a reference count to track how many shared_ptr objects share ownership of the resource. When the last shared_ptr is destroyed or reset, the resource is automatically deleted.
+Thread-safe: The reference count is thread-safe.
+Example:
+cpp
+Copy code
+#include <iostream>
+#include <memory> // for std::shared_ptr
+
+class MyClass {
+public:
+    MyClass() { std::cout << "Constructor\n"; }
+    ~MyClass() { std::cout << "Destructor\n"; }
+};
+
+int main() {
+    std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>(); // create shared_ptr
+    {
+        std::shared_ptr<MyClass> ptr2 = ptr1; // ptr2 shares ownership with ptr1
+        std::cout << "ptr2 use count: " << ptr2.use_count() << "\n"; // prints 2
+    } // ptr2 goes out of scope, but the object is not deleted because ptr1 still holds ownership
+
+    std::cout << "ptr1 use count: " << ptr1.use_count() << "\n"; // prints 1
+} // ptr1 goes out of scope, and the destructor of MyClass is called
+When to use:
+When you want shared ownership of a resource, and the resource should not be deleted until the last owner is done with it.
+This is useful in scenarios like implementing shared data or resources in multithreaded environments.
+3. std::weak_ptr
+Non-owning Reference: A weak_ptr is a special type of smart pointer that does not participate in ownership of the object. Instead, it provides a way to access an object that is managed by a shared_ptr, but it doesn’t increase the reference count.
+Avoid Circular Dependencies: weak_ptr is often used to prevent circular references (i.e., when two or more shared_ptrs point to each other, which would result in memory leaks because the reference count would never reach zero).
+Check Validity: A weak_ptr can be converted to a shared_ptr using the lock() method, but you should check if the object is still alive before accessing it.
+Example:
+cpp
+Copy code
+#include <iostream>
+#include <memory> // for std::weak_ptr, std::shared_ptr
+
+class MyClass {
+public:
+    MyClass() { std::cout << "Constructor\n"; }
+    ~MyClass() { std::cout << "Destructor\n"; }
+};
+
+int main() {
+    std::shared_ptr<MyClass> ptr1 = std::make_shared<MyClass>(); // create shared_ptr
+    std::weak_ptr<MyClass> weakPtr = ptr1; // create weak_ptr, no increase in ref count
+
+    std::cout << "ptr1 use count: " << ptr1.use_count() << "\n"; // prints 1
+
+    if (auto sharedPtr = weakPtr.lock()) { // weak_ptr.lock() returns a shared_ptr
+        std::cout << "Object is still alive\n";
+    } else {
+        std::cout << "Object has been destroyed\n";
+    }
+} // ptr1 goes out of scope, MyClass object is destroyed
+When to use:
+When you need a non-owning reference to an object that is managed by shared_ptr.
+Especially useful when you want to avoid circular references (e.g., in complex data structures like graphs or trees).
+Comparing Smart Pointers
+Smart Pointer	Ownership Type	Reference Count	Use Case
+std::unique_ptr	Exclusive (unique)	No	Sole ownership, automatic resource release.
+std::shared_ptr	Shared ownership	Yes	Multiple owners, automatic deletion when the last one is done.
+std::weak_ptr	Non-owning, weak reference	No	Non-owning, used with shared_ptr to avoid circular references.
+Key Advantages of Smart Pointers:
+Automatic Memory Management: You don't need to worry about manually deleting dynamically allocated objects.
+Exception Safety: Smart pointers help avoid memory leaks in the event of exceptions.
+Avoiding Dangling Pointers: They automatically manage memory so that you don't end up with invalid pointers pointing to freed memory.
+By using smart pointers, you can write safer, more efficient C++ code, especially when dealing with dynamic memory and complex object ownership semantics.
