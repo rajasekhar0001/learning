@@ -1,0 +1,17 @@
+==> Longest subarray with given sum (including 0 and positives)
+    -> Consider the array
+    a = [2, 0, 0, 3], k = 3
+    -> If we start summing elements from starting, sum will increase as going forward
+
+    ==>  ==> Using 2 pointer approach
+    -> left and right pointers at starting
+    -> Start from right until it is less tvhan size, keep summing elements in array
+    -> if sum > k, until sum <= k, keep incrementing left and subtract the same from sum
+    -> If sum == k, find the maximum of previos length and current length as (right - left) + 1
+    
+    ==> Using hashing
+    -> use map data structure for hashing
+    -> use one pointer index to iterate the array from 0 to n-1.
+    -> If sum == k, then updata the maxLen
+    -> if (sum - k), present in map, then also update maxLen
+    -> If (sum-k) is not present in map, add it to map with (sum -k) and index

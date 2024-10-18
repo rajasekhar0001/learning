@@ -1,0 +1,23 @@
+==>  Dutch National Flag Algorithm (DNF Algorithm)
+
+    -> is a popular algorithm used to sort an array containing 3 distinct values.
+    -> The main idea is to partition the array into 3 sections
+    Assueme pivot as 1
+    --> One section containing the values smaller than the pivot value
+    --> One section containing the values equal to the pivot value
+    --> One section containing the values greater than the pivot
+
+-> Link for problem: https://leetcode.com/problems/sort-colors/description/
+Ex: To sort an array which consists 3 distinct value 0, 1, 2  
+3 pointer approach: low, mid, high. And 3 main rules as below
+
+-> low is pointing to 0;
+-> mid is pointing to 0;
+-> high is pointing to last element (n-1)
+
+if (a[mid] == 0) -> swap(a[mid], a[low]); low++; mid++;
+
+else if (a[mid] == 1) -> mid++;
+
+else
+    swap(a[mid], a[high]); high--; // Don't increment mid, because the swapped element needs to be re-examined
