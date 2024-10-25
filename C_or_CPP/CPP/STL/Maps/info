@@ -1,0 +1,6 @@
+-> Maps are designed in such a way they, each element is a combination of key- value pair
+-> ordered map(map) -> Is by default sorted based on key (uses)
+-> unordered_map(unordered_map) -> folows insertion order (uses hashing internally)
+
+-> To sort map, based on value, used vectors
+-> sort() can't be used with map
