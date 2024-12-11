@@ -1,0 +1,14 @@
+In C++, serialization is the process of converting an object into a sequence of bytes so that it can be stored in memory or transmitted across a network and deserialization is the reverse process, where the byte stream is used to reconstruct the original object. In this article, we will learn how we can serialize and deserialize an object in C++.
+
+What is Object Serialization?
+Serialization is the process of converting an object of a particular class into a stream of bytes in such a way that we can reconstruct the exact same object at later times. The process of reconstructing the serialized object is called deserialization. It is generally used to store it in the memory or transmit it over a network.
+
+Need for Serialization of Object in C++:
+Serialization is needed when we need to store the state of the structure data such as classes and structes in C++.
+
+Generally in C++, when we write data in binary form to files using fwrite(), it will simply convert all the data in the given object to binary and store it in the memory as it is. Due to this, members that may refer to the dynamic memory will not be copied. Also, if the class contains the virtual functions, it may not work correctly when reconstructed.
+
+So, serialization is needed for the proper conversion and storage of the given objects so that they can be properly reconstructed.
+
+How to Serialization and Deserialization an Object in C++?
+We can serialize an object either using the inbuilt fstream class with custom serialization function or we can use the external libraries such as boost serialization that provides robust method of serialization.
