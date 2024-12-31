@@ -1,0 +1,19 @@
+Dynamic Programming:
+-> A type of programming, which stores all the answers to the sub problems, which are going
+to be used later to find the main solution
+
+Types:
+1) Tabulization -> Bottom Up approch (Using tabulization, instead of recursion)
+2) Memoization  -> Top Down approach  (Using recursion)
+
+
+-> In some problems, In recursion, instead of solving the same sub problem again if it comes
+   we will be storing that in some map or table (which is memoization)
+
+=> Memoization:
+    In this case we will be using recursion and array/map/table to store the sub problems solution
+    In solving, if the same sub problem comes, intead of re solving using the store answer.
+-> Tabulization:
+    without using recursion, using Tabulization
+
+-> if possibe, trying to reduce the space complexity without using tabulization and recursion
