@@ -1,0 +1,34 @@
+== Dijkstra's Algorithm ==
+-> Used to identify the shortest path between two nodes
+-> It can be done using
+    Queue -> Priority Queue -> Set
+
+    Set is best, Priority Queue is better, Queue is good
+-> Dijkstra's algorithm doesn't work for graph with negative weights
+
+    Because, based on weight we are inserting new elements into queue, it negative comes
+    we can't use max/ min based condition ( for not to insert in queue and to).
+
+    -> Still, if we use, it will fall into infinite loop.
+
+Node: In priority_queue, set or queue, elements will be stored like {distance, node};
+-> Priority Queue : Can be build on top min heap or max heap
+    Syntax to make it max heap:
+    priority_queue<int> pq;  // will return max value always, when we do pq.top();
+    Syntax to make it min heap
+    => priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // min_heap based (top always be a small)
+
+-> Set -> which stores the elements in ascending order like min heap
+    => Advantage over Priority Queue:
+        -> some element from priority_queue can't removed in middle, it is must to travel all the elements
+        -> In case of set, if we find some shortest path at some node from some node, we can delete and replce with min distance and node
+        -> No need to iterate throught the deleted one
+        -> This doesn't mean optimised compared to priority_queue ( it depends on graph)
+        \
+
+Q) Why Priority_queue not Queue ?
+    Queue -> It will explore all the paths and find the minimum, take more time
+    Priority Queue -> It will only explore the minimum distance paths, so it will take less time.
+
+T.C  => V^2 log(V^2) => V^2  * 2 log V
+        => E log V (V^2 vertices means , total edges will be E)
