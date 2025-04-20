@@ -1,0 +1,49 @@
+Bellman ford algorithm: helps
+                1) to find shortest path 
+                2) To find negative cycles
+                3) Applicable for DG (Directed Graph)
+        In case of Undirected graph, need to create directed graph from it
+
+Drawbacks with Dijkstra:
+    1) Limited to Graphs with positive edges
+    2) In case of negative cycles, algorithm will give TLE (keeps searching for shortest path)
+
+
+Bellman ford algorithm steps:
+-> In a graph of N nodes, in worst case, you will take N-1 edges to reach from the first to last, thereby we iterate N-1 iterations.
+-> In each iteration, will traverse all the edges and check for condition (which is relaxation)
+    Ex: (u, v, wt)  -> to travel from u to v
+    if(dist[u] != 1e8 && dist[u] + wt < dist[v]) {
+        dist[v] = dist[u] + wt;
+    }
+
+-> To check whether negative cycle exist or not, will do Nth relaxation
+
+Negative Cycle: A cycle is called a negative cycle if the sum of all its weights becomes negative. The following illustration is an example of a negative cycle:
+
+
+Code:
+vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
+    vector<int> dist(V, 1e8);
+    
+    dist[src] = 0; // Update min distance to reach source node
+    
+    // Do N-1 iterations (or relaxations)
+    for(int iter=0;iter < V - 1;iter++) {
+        for(auto edge : edges) {
+            if(dist[edge[0]] != 1e8 && dist[edge[0]] + edge[2] < dist[edge[1]]) {
+                dist[edge[1]] = dist[edge[0]] + edge[2];
+            }
+        }
+    }
+    
+    // N-th relaxation to check for the existance of negative cycles
+    for(auto edge : edges) {
+        if(dist[edge[0]] != 1e8 && dist[edge[0]] + edge[2] < dist[edge[1]]) {
+            return {-1};
+        }
+    }
+    
+    return dist;
+    
+}
