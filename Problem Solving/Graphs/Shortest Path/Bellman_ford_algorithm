@@ -21,6 +21,7 @@ Bellman ford algorithm steps:
 
 Negative Cycle: A cycle is called a negative cycle if the sum of all its weights becomes negative. The following illustration is an example of a negative cycle:
 
+
 Code:
 vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
     vector<int> dist(V, 1e8);
