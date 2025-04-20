@@ -1,0 +1,36 @@
+Floyd Warshall algorithm: is a multi-source shortest path algorithm and it helps to detect negative cycles as well. 
+    The shortest path between node u and v necessarily means the path(from u to v) for which the sum of the edge weights is minimum.
+
+TC: O(n^3), SC = O(n^2)
+
+Code:
+void floydWarshall(vector<vector<int>> &dist) {
+    // changing in place of given matrix, where dist[i][j] = 0 (if i==j), and unvisited nodes marked as 1e8
+    int n = dist.size();
+    
+    
+    for(int k=0;k<n;k++) {
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                
+                // Skip in case of some node is unvisited
+                if(dist[i][k] == 1e8 || dist[k][j] == 1e8)
+                    continue;
+                
+                // Actual logic, path from i to j via k
+                dist[i][j] = min(dist[i][j],
+                                dist[i][k] + dist[k][j]);
+            }
+        }
+    }
+    
+    // Below code is to check the existence of negative cycle
+    for(int i=0;i<n;i++) {
+        if(dist[i][i] < 0) {
+            // contains negative cycle
+            return;
+        }
+    }
+
+
+}
