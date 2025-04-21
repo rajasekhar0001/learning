@@ -1,0 +1,51 @@
+code:
+
+
+// Function to find sum of weights of edges of the Minimum Spanning Tree.
+    
+// TC : E log E + E log E = ElogE
+// SC : O(E), at a time we can have E edges in Priority Queue
+int spanningTree(int V, vector<vector<int>> adj[]) {
+    int minWeight = 0;
+    
+    
+    // {weight, node}
+    
+    // not storinhg parent, since I dont need to store MST, i need just MST weight
+    // If I need to find MST as well, will store parent of node too
+    // While calculating minWeight, will keep node and its parent in some MST vector
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
+    
+    // VISITED ARRAY
+    vector<bool> visited(V, false); // Not visited
+    
+    // starting from nodes 0, initial edge weight also 0
+    q.push({0, 0});
+    
+    while(!q.empty()) {
+        int dist = q.top().first;
+        int node = q.top().second;
+        
+        q.pop();
+        
+        // After removing from priority queue, check visited or not and add to MST
+        // Just weight is added, since calculating weight of MST
+        // Not storing MST
+        if(visited[node]) { // If node is visited, no need to check adjacent nodes
+            continue;
+        }
+        visited[node] = true;
+        // adding weight
+        minWeight += dist;
+        
+        for(auto it: adj[node]) {
+            // CHeck adjacent nodes, if it is unvisited, add to priority queue
+            if(!visited[it[0]]) {
+                q.push({it[1], it[0]});
+            }
+        }
+    }
+    
+    return minWeight;
+    
+}

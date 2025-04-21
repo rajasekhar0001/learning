@@ -1,0 +1,12 @@
+Minimum Spanning Tree:
+
+SPanning Tree: A tree can be having multiple spanning trees
+    Def: A tree with N nodes and N-1 edges, and all nodes are reachable from each other.
+
+Minimum Spanning Tree: A tree can have multiple Spanning Trees, but Minimum Spanning Tree is the Spanning Tree with Minimum sum of 
+                   edge weights among all the possible Spanning Trees of that Tree.
+
+
+To find MST, we have multple algorithms
+1) Prim's algorithms
+2) Kruskal's algorithms  -> In order to understand, Disjoint set need to be understood
