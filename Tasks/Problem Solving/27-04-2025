@@ -1,0 +1,5 @@
+Find the centre of the tree
+   --> using 2 approaches
+   1) Removing the leaf nodes, till 1 or 2 nodes remains that could be the centre
+   2) FInd the longest path or diameter of the tree (will do this twice using DFS or BFS
+   to find longest path from A -> B and B -> A), get the middle nodes 1 or 2.
