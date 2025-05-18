@@ -1,0 +1,14 @@
+Guide to Big O Notation & Complexity Analysis for Algorithms:
+
+Below are the Complexity classes:
+
+    1) Constant - O(1)
+    2) Logarithmic - O(log(n))
+    3) Linear - O(n)
+    4) Loglinear/ Linearithmmic - O(n* log(n))
+        Bigger that O(n) but smaller than O(n^2)
+
+    5) Polynomial - O(n^c), where c is some constant.       ==> Ex: O(n^2), O(n^3), etc. 
+    6) Exponential - O(c^n), where c is some constant.   ==> Ex: O(2^n), etc.
+        --> In case of recursion, it can be observed max.
+    7) Factorial - O(n!)
