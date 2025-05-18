@@ -33,10 +33,10 @@ class DisjointSet {
         if (ulp_u == ulp_v)
             return;
         // lower rank node is connected to higher rank node, to reduce T.C
-        if (rank[ulp_u] < rank[ulp_v]) { // update parent of pu as pv, not required to update rank
+        if (rank[ulp_u] < rank[ulp_v]) { // update parent of ulp_u as ulp_v, not required to update rank
             parent[ulp_u] = ulp_v;
         }
-        else if (rank[ulp_u] > rank[ulp_v]) { // update parent of pu as pv, not required to update rank
+        else if (rank[ulp_u] > rank[ulp_v]) { // update parent of ulp_u as ulp_v, not required to update rank
             parent[ulp_v] = ulp_u;
         }
         else {
