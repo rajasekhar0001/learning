@@ -1,0 +1,83 @@
+Logic in words:
+--> we can use UNionByRank or UNionBySize
+--> Create vector of edges with (u, v, w) or (w, u, v), sorted by weight
+--> Traverse edges
+--> For each edge, check u and v that are they belongs to same component
+     If they belongs to same components, their ultimate parents willl be same, dont consider that edge, since its already included in the MST, using the method findParent(node);
+
+--> If they are not belongs to same parent, increse minWeight with w, and add that edge to MST using unionBySize(u, v) method
+
+
+code:
+
+class Solution {
+    
+    class UnionBySize {
+        public:
+        vector<int> parent, size;
+        // public:
+        UnionBySize(int n) {
+            parent.resize(n, 0);
+            size.resize(n, 0);
+            
+            for (int i=0;i<n;i++) {
+                parent[i] = i;
+            }
+        }
+        
+        int findParent(int u) {
+            if (u == parent[u]) {
+                return u;
+            }
+            
+            return parent[u] = findParent(parent[u]);
+        }
+        
+        void unionBySize(int u, int v) {
+            int ulp_u = findParent(u);
+            int ulp_v = findParent(v);
+            
+            if (size[ulp_u] < size[ulp_v]) {
+                parent[ulp_u] = ulp_v;
+                size[ulp_v] += size[ulp_u];
+            }
+            else {
+                parent[ulp_v] = ulp_u;
+                size[ulp_u] += size[ulp_v];
+            }
+        }
+        
+    };
+    
+  public:
+    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    int spanningTree(int V, vector<vector<int>> adj[]) {
+        // sort(adj.begin(), adj.end(), [](auto it1, auto it2))
+        vector<vector<int>> edges;
+        
+        for (int i=0;i<V;i++) {
+            // vector<int> ds;
+            for (int j=0;j<adj[i].size();j++) {
+               edges.push_back({adj[i][j][1], i, adj[i][j][0]});
+            }
+        }
+        
+        // Sort the array of edges b y weight, it is easy to find minWeight SPanning Tree with DisjointSet
+        sort(edges.begin(), edges.end());
+        
+        UnionBySize ds(V); // creating UnionBySize class object with V nodes
+        
+        int minWeight = 0;
+        for (auto it: edges) { // trverseing edges from least weight
+            if (ds.findParent(it[1]) != ds.findParent(it[2])) { // if the ultimate parents of from and to nodes rea not same, means different component
+            // we have consider, else same component, no need to consider that edge since already included in Minum Spanning Tree
+                minWeight += it[0];
+                ds.unionBySize(it[1], it[2]); // Updated teh SPanning Tree with edge
+            }
+        }
+        
+        return minWeight;
+        
+        
+    }
+};
