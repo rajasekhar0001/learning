@@ -43,6 +43,11 @@ Case 2: (If the directed graph contains a cycle): The following directed graph c
  there exists a cyclic dependency in the graph. Thereby, topological sorting is only possible for a directed acyclic graph.
  */
 
+ /**
+  * Cycle detection is also possible with Kahn'a algorithm
+  * If the number of visited nodes is not equal to total node, then there CYCLE EXIST
+  */
+
 #include <bits/stdc++.h>
 using namespace std;
 
