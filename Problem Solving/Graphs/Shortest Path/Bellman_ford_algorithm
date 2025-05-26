@@ -21,6 +21,11 @@ Bellman ford algorithm steps:
 
 Negative Cycle: A cycle is called a negative cycle if the sum of all its weights becomes negative. The following illustration is an example of a negative cycle:
 
+--> Negative cycles can be counted in the Nth relaxation
+    if there is possibility of relaxation for any node, there negative cycle exist
+    in that case, use some visited array, use BFS or DFS to find Negative cycles count
+    --> visited array helps, not to visit any node twice
+
 
 Code:
 vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
@@ -30,6 +35,7 @@ vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
     
     // Do N-1 iterations (or relaxations)
     for(int iter=0;iter < V - 1;iter++) {
+        // Iterate all edges in every relaxation
         for(auto edge : edges) {
             if(dist[edge[0]] != 1e8 && dist[edge[0]] + edge[2] < dist[edge[1]]) {
                 dist[edge[1]] = dist[edge[0]] + edge[2];
@@ -40,6 +46,7 @@ vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
     // N-th relaxation to check for the existance of negative cycles
     for(auto edge : edges) {
         if(dist[edge[0]] != 1e8 && dist[edge[0]] + edge[2] < dist[edge[1]]) {
+            // Apply DFS or BFS and use visited array, to count Negative cycles
             return {-1};
         }
     }

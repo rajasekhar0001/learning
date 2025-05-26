@@ -1,31 +1,47 @@
-Floyd Warshall algorithm: is a multi-source shortest path algorithm and it helps to detect negative cycles as well. 
-    The shortest path between node u and v necessarily means the path(from u to v) for which the sum of the edge weights is minimum.
+Floyd Warshall algorithm: Can be used for directed graph only, in case of undirected, covert to Directed Graph
+
+is a multi-source shortest path algorithm and it helps to detect negative cycles as well. 
+The shortest path between node u and v necessarily means the path(from u to v) for which the sum of the edge weights is 
+minimum.
 
 TC: O(n^3), SC = O(n^2)
+
+-> Until now, to store a graph we have used the adjacency list. But in this algorithm, we are going to use the adjacency 
+matrix method. 
+-> One additional point to remember is that the cost of reaching a node from itself must always be 0 i.e. dist[i][i] = 0, 
+ where i = current node.
 
 Code:
 void floydWarshall(vector<vector<int>> &dist) {
     // changing in place of given matrix, where dist[i][j] = 0 (if i==j), and unvisited nodes marked as 1e8
     int n = dist.size();
+
+    // Given matrix, if there is an edge between i and j, it will be having weight,
+    // if i == j, weight is 0
+    // If there is no edge between i and j, it will be having +ve infinity
+    
+    // note: If the input is adjacenncy list or edges, create adjacency matrix with above conditions.
     
     
-    for(int k=0;k<n;k++) {
+    for(int via=0;via<n;via++) {
         for(int i=0;i<n;i++) {
             for(int j=0;j<n;j++) {
                 
                 // Skip in case of some node is unvisited
-                if(dist[i][k] == 1e8 || dist[k][j] == 1e8)
+                if(dist[i][via] == 1e8 || dist[via][j] == 1e8)
                     continue;
                 
-                // Actual logic, path from i to j via k
+                // Actual logic, path from i to j via via node
                 dist[i][j] = min(dist[i][j],
-                                dist[i][k] + dist[k][j]);
+                                dist[i][via] + dist[via][j]);
             }
         }
     }
     
     // Below code is to check the existence of negative cycle
     for(int i=0;i<n;i++) {
+        // All the diagnols, weight of node to itself is always 0
+        // During the algorithm, diagnol elements will be having negative values if negative cycle exist
         if(dist[i][i] < 0) {
             // contains negative cycle
             return;
