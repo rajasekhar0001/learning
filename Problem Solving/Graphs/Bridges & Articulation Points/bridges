@@ -1,0 +1,67 @@
+Bridge:
+Any edge in a component of a graph is called a bridge when the component is divided into 2 or more components 
+if we remove that particular edge.
+
+
+Approach:
+link: https://takeuforward.org/graph/bridges-in-graph-using-tarjans-algorithm-of-time-in-and-low-time-g-55/
+
+    -->order to find all the bridges of a graph, we will implement some logic over the DFS algorithm. This is more of an algorithm-based approach. So, let’s discuss the algorithm in detail. Before that, we will discuss two important concepts of the  algorithm i.e. time of insertion and lowest time of insertion.
+
+1) time of insertion
+2) lowest time of insertion
+
+logic:
+
+Now, it’s time to visit the adjacent nodes. 
+    --> If the adjacent node is the parent itself, we will just continue to the next node.
+    --> If the adjacent node is not visited, we will call DFS for the adjacent node with the current node as the parent.
+    After the DFS gets completed, we will compare the lowest time of insertion of the current node and the adjacent node and take the minimum one.
+    --> Now, we will check if the lowest time of insertion of the adjacent node is greater than the time of insertion of the current node.
+    --> If it is, then we will store the adjacent node and the current node in our answer array as they are representing the bridge.
+    --> If the adjacent node is already visited, we will just compare the lowest time of insertion of the current node and the adjacent node and take the minimum one.
+    --> Finally, our answer array will store all the bridges.
+
+Code:
+
+class Solution {
+    int timer = 1;
+    void dfs(int node, int parent, vector<vector<int>>& adj, vector<bool>& visited, vector<int>& toi, vector<int>& ltoi, vector<vector<int>>& ans) {
+        visited[node] = true;
+        ltoi[node] = toi[node] = timer;
+        timer++;
+
+        for (auto it: adj[node]) {
+            if (it == parent)
+                continue;
+            if (!visited[it]) {
+                dfs(it, node, adj, visited, toi, ltoi, ans);
+                ltoi[node] = min(ltoi[node], ltoi[it]);
+
+                if (ltoi[it] > toi[node]) {
+                    ans.push_back({node, it});
+                }
+            }
+            else {
+                ltoi[node] = min(ltoi[node], ltoi[it]);
+            }
+        }
+    }
+    
+public:
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+        vector<bool> visited(n, false);
+
+        vector<vector<int>> adj(n);
+        for (auto edge: connections) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+        vector<int> toi(n, 0); // time of insertion
+        vector<int> ltoi(n, 0); // lowest time of insertion except parent node
+        vector<vector<int>> ans;
+        dfs(0, -1, adj, visited, toi, ltoi, ans);
+
+        return ans;
+    }
+};
