@@ -1,0 +1,71 @@
+Articulaion point:
+Articulation Points of a graph are the nodes on whose removal, the graph breaks into multiple components. 
+
+Approach:
+link: https://takeuforward.org/data-structure/articulation-point-in-graph-g-56/
+
+1) time of insertion -> Dring the DFS call, the time when a node is visited, is called its time of insertion
+2) lowest time of insertion -> In this case, the current node refers to all its adjacent nodes except the parent and 
+   the visited nodes and takes the minimum lowest time of insertion into account.
+
+code:
+class Solution {
+    int time = 0;
+    void dfs(int node, int parent, vector<int> adj[], vector<int>& visited, vector<int>& toi, vector<int>& ltoi, vector<int>& ans) {
+        visited[node] = 1;
+        toi[node] = ltoi[node] = time;
+        time++;
+        int child = 0;
+        for (int adjNode : adj[node]) {
+            if (parent == adjNode)
+                continue;
+            if (!visited[adjNode]) {
+                dfs(adjNode, node, adj, visited, toi, ltoi, ans);
+                child++;
+                // Once all the nodes of adjNode are visited, considering min from adjNode and node
+                // Since adjNode is adjacent node to node
+                ltoi[node] = min(ltoi[node], ltoi[adjNode]);
+                // ✅ Non-root articulation point check
+                // >= requiered in articulation points finding, If not clear check with some graph, written in notes or lecture
+                if (ltoi[adjNode] >= toi[node] && parent != -1) {
+                    ans[node] = 1; // marked as node as articulation point
+                }
+            }
+            else {
+                // If the node is visited, consider the min as node's ltoi and adjacent node's toi
+                // Since we are considering what if the node is removed
+                ltoi[node] = min(ltoi[node], toi[adjNode]);
+            }
+        }
+        
+        // ✅ Root node articulation point check
+        if (child > 1 && parent == -1) {
+            ans[node] = 1; // marked as node as articulation point, if it is starting or parent node to all
+        }
+    }
+  public:
+    vector<int> articulationPoints(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> visited(V, 0);
+        vector<int> toi(V, 0);
+        vector<int> ltoi(V, 0);
+        vector<int> ans(V, 0);
+        for (int i=0;i<V;i++) {
+            if (!visited[i]) {
+                dfs(i, -1, adj, visited, toi, ltoi, ans);
+            }
+        }
+        
+        vector<int> res;
+        for (int i=0;i<V;i++) {
+            if (ans[i])
+                res.push_back(i);
+        }
+        
+        if (res.empty())
+            return {-1};
+        return res;
+        
+    }
+    
+};

@@ -8,8 +8,8 @@ link: https://takeuforward.org/graph/bridges-in-graph-using-tarjans-algorithm-of
 
     -->order to find all the bridges of a graph, we will implement some logic over the DFS algorithm. This is more of an algorithm-based approach. So, let’s discuss the algorithm in detail. Before that, we will discuss two important concepts of the  algorithm i.e. time of insertion and lowest time of insertion.
 
-1) time of insertion
-2) lowest time of insertion
+1) time of insertion -> Dring the DFS call, the time when a node is visited, is called its time of insertion
+2) lowest time of insertion -> In this case, the current node refers to all its adjacent nodes except the parent and takes the minimum lowest time of insertion into account
 
 logic:
 

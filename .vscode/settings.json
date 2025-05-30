@@ -3,5 +3,6 @@
         "future": "cpp",
         "iostream": "cpp",
         "stdint.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/workspaces/learning/UTS_CPP"
 }
