@@ -1,0 +1,91 @@
+Tarjan’s Algorithm: Computation Steps
+
+✨ Key Concepts
+Discovery time (ids[]): When a node is first visited.
+
+   Low-link value (low[]): The smallest discovery time reachable from this node (including itself).
+
+   Stack (s): Keeps track of the current DFS path.
+
+   onStack[]: Boolean array to mark which nodes are in the stack.
+
+   SCC root: A node where ids[node] == low[node].
+
+✅ Steps During Computation:
+   Start DFS from an unvisited node.
+
+   Assign it an ID (ids[node] = low[node] = current_id++) and push it onto the stack.
+
+   Recur into its neighbors:
+
+      If the neighbor is not visited, DFS on it.
+
+      If it’s in the stack, update the current node’s low with min(low[node], low[neighbor]).
+
+   After all neighbors are explored:
+
+      If ids[node] == low[node], it is the head of an SCC.
+
+      Pop from the stack until you reach this node → all popped nodes form one SCC.
+    
+
+Code:
+
+class Solution {
+    vector<int> low;
+    vector<int> ids;
+    vector<int> onStack;
+    stack<int> s;
+    int id = 0;
+    vector<vector<int>> sccs;  // To store result SCCs
+
+    void dfs(int node, vector<int> adj[], vector<bool>& visited) {
+        visited[node] = true;
+        ids[node] = low[node] = id++;
+        onStack[node] = 1;
+        s.push(node);
+
+        for (int to : adj[node]) {
+            if (!visited[to]) {
+                dfs(to, adj, visited);
+                low[node] = min(low[node], low[to]);
+            } else if (onStack[to]) {
+                low[node] = min(low[node], low[to]);
+            }
+        }
+
+        if (ids[node] == low[node]) {
+            vector<int> scc;
+            while (true) {
+                int u = s.top(); s.pop();
+                onStack[u] = 0;
+                scc.push_back(u);
+                if (u == node) break;
+            }
+            sort(scc.begin(), scc.end());  // Optional: sort each SCC
+            sccs.push_back(scc);
+        }
+    }
+
+public:
+    vector<vector<int>> tarjans(int V, vector<int> adj[]) {
+        vector<bool> visited(V, false);
+        low.resize(V);
+        ids.resize(V, -1);
+        onStack.resize(V, 0);
+        id = 0;
+        sccs.clear();
+
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                dfs(i, adj, visited);
+            }
+        }
+
+        sort(sccs.begin(), sccs.end());  // Optional: sort list of SCCs
+        return sccs;
+    }
+};
+
+
+

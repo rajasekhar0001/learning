@@ -1,0 +1,26 @@
+Strongly connected components:
+
+-> Can be thought of as a self-contained cycles within a directed graph where every vertex in the given cycle can reach
+   every other vertex in the same cycle.
+   
+
+-> Can be solved using two algorithms
+   1) Kosaraju's algorithm
+   2) Tarjan's algorithm
+
+
+Tarjan's vs Kosaraju's – Basic Differences
+   Tarjan's algorithm uses only one DFS.
+   Kosaraju's algorithm uses two DFS passes.
+
+   Tarjan finds SCCs during the DFS.
+   Kosaraju finds SCCs after reversing the graph.
+
+   Tarjan doesn't modify the graph.
+   Kosaraju needs to reverse all edges.
+
+   Tarjan is slightly harder to understand at first, but more efficient in terms of space and steps.
+   Kosaraju is easier to code and understand because it splits the work into two clear parts.
+
+   Both find the same result (SCCs) and run in O(V + E) time.
+
