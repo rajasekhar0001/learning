@@ -1,0 +1,58 @@
+Problem: return 2, if Eulerian circuit exist
+        return 1, if Eulerian path exist
+        ELSE return 0.
+
+Code: For undirected graph
+
+class Solution {
+    int isContainsEulerianCircuitOrPath(int V, vector<int> &degree) {
+        int oddDegreeCount = 0;
+        for (int i: degree) {
+            if (i % 2 == 1)
+                oddDegreeCount++;
+        }
+        if (oddDegreeCount == 0)
+            return 2;
+        else if (oddDegreeCount == 2) 
+            return 1;
+        return 0;
+    }
+    
+    void dfs(int node, vector<int> adj[], vector<int>& visited) {
+        visited[node] = 1;
+        
+        for (int adjNode: adj[node]) 
+        {
+            if (!visited[adjNode]) {
+                dfs(adjNode, adj, visited);
+            }
+        }
+    }
+  public:
+  // Since the give graphis undirected, 
+  
+    int isEulerCircuit(int V, vector<int> adj[]) {
+        vector<int> degree(V, 0);
+        
+        for (int i=0;i<V;i++) {
+            degree[i] = adj[i].size();
+        }
+        
+        // Check if there are multiple components
+        int components = 0;
+        vector<int> visited(V, 0);
+        for (int i=0;i<V;i++) {
+            if (!visited[i]) {
+                dfs(i, adj, visited);
+                components++;
+            }
+            if (components >= 2 && degree[i] != 0)
+                return 0;
+            
+        }
+        
+        
+        int ret;
+        return (ret = isContainsEulerianCircuitOrPath(V, degree))==0? 0 : ret;
+    }
+};

@@ -1,0 +1,44 @@
+🔄 What is an Eulerian Path?
+    An Eulerian Path is a path in a graph that:
+
+    Visits every edge exactly once, and
+
+    Can start and end at different vertices.
+
+🔁 What is an Eulerian Circuit?
+    An Eulerian Circuit (or Cycle) is a special case of an Eulerian Path where:
+
+    It starts and ends at the same vertex, and
+
+    Still visits every edge exactly once.
+
+✅ Conditions to Exist (in Undirected Graphs)
+    Eulerian Circuit exists if:
+        All vertices have even degree, and
+
+        The graph is connected (except isolated vertices).
+    
+    [Isolated vertices: means component with singe node which are not connected to any other nodes]
+
+    Eulerian Path exists if:
+        Exactly 0 or 2 vertices have odd degree, and
+
+        The graph is connected.
+
+🌐 Directed Graph Version
+    Eulerian Circuit (directed):
+        For every vertex: in-degree = out-degree
+
+        Graph is strongly connected
+
+    Eulerian Path (directed):
+        Exactly one vertex with (out − in = 1) → start node
+
+        Exactly one vertex with (in − out = 1) → end node
+
+        All other vertices: in-degree = out-degree
+    
+Note: if a graph has an Eulerian circuit, it definitely has an Eulerian path too.
+
+
+note: CHoosing wrong start node will not give answer

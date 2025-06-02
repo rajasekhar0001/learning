@@ -1,0 +1,21 @@
+The Travelling Salesman Problem (TSP) is a classic problem in computer science and optimization.
+
+It asks:
+"Given a list of cities and the distances between them, what is the shortest possible route that visits each city 
+ exactly once and returns to the starting city?"
+
+📈 Why is TSP Hard?
+    For n cities, there are (n – 1)! possible routes.
+
+    The number of possible paths grows very fast as the number of cities increases.
+
+    It's an NP-hard problem — there's no known efficient algorithm that works for all sizes.
+
+🧮 Solutions
+    Brute force: Try all permutations → takes too long for large n.
+
+    Dynamic Programming: Like Held-Karp Algorithm → works for ~20–25 cities.
+
+    Approximation algorithms: Give near-optimal solutions faster.
+
+    Heuristics / AI techniques: Like genetic algorithms, ant colony, simulated annealing.

@@ -2,7 +2,8 @@
     "files.associations": {
         "future": "cpp",
         "iostream": "cpp",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "code": "cpp"
     },
     "cmake.sourceDirectory": "/workspaces/learning/UTS_CPP"
 }
