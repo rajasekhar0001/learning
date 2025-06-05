@@ -1,0 +1,52 @@
+Max Flow Ford Fulkerson algorithm:
+To find max flow from source to sink node:
+
+        Flow Network: Directed graph with capacities on edges.
+
+        Capacity: Maximum flow an edge can carry.
+
+        Flow: Actual amount sent through an edge.
+
+        Residual Graph: Graph showing remaining capacities and reverse edges.
+
+        Augmenting Path: Path from source to sink with available capacity.
+
+        Path Flow: Minimum residual capacity on an augmenting path.
+
+        Residual Capacity: Capacity left on an edge after flow.
+
+        Updating Residual Graph: Adjusting capacities after sending flow.
+
+        Maximum Flow: Total flow from source to sink after no augmenting path exists.
+        
+
+Ford-Fulkerson Algorithm: Simple Steps
+
+    Start with zero flow
+    Initially, there is no flow in the network — all flows are zero.
+
+    Build a residual graph
+    This graph shows how much more flow can be pushed through each edge (capacity - current flow).
+
+    Find an augmenting path
+    Find any path from the source to the sink in the residual graph where all edges have positive residual capacity.
+
+    You can use DFS or BFS for this. (During the traversal, will kepp a parent vector, so that we can traverse path and find minFlow along path, as well as reduce forward and increase revrse also will do with this vector)
+
+    Find bottleneck capacity on that path
+    Find the smallest capacity (minimum residual capacity) along the path — this is the maximum flow you can push through this path.
+
+    Augment the flow along the path
+    Increase the flow on each edge along the path by this bottleneck capacity.
+    Also, update the residual graph accordingly (reduce forward edge capacity, increase reverse edge capacity).
+
+    Repeat steps 3-5
+    Keep finding augmenting paths and augmenting flow until no augmenting path exists from source to sink.
+
+    Done!
+    When no more augmenting paths exist, the total flow pushed from source to sink is the maximum flow
+
+Ford-Fulkerson (basic)	->  DFS (any path)	  ->  Worst case exponential
+Edmonds-Karp ->  BFS (shortest path) ->	O(V * E²) polynomial
+
+Edmonds-Karp algorithm, which is a specific implementation of Ford-Fulkerson with better time guarantees.
