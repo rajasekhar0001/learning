@@ -1,0 +1,65 @@
+📘 1. What is a Bipartite Graph?
+    A bipartite graph is a graph where:
+
+        Nodes can be divided into two disjoint sets:
+        U and 𝑉
+
+        Every edge connects a node in 
+        𝑈 to a node in V,
+
+        No edges exist between nodes in the same set.
+
+Examples:
+
+    People ↔ Jobs
+
+    Students ↔ Courses
+
+    Mice ↔ Holes 🐭🕳️
+
+
+🕳️
+
+🐭 2. The Mice and Owl Holes Problem (Generalized)
+    Problem Statement:
+    You have:
+
+        M mice.
+
+        H holes, each with a capacity (how many mice it can hold).
+
+    Each mouse can reach some subset of holes.
+
+    You must assign mice to holes so that:
+
+    Each mouse gets exactly one hole,
+
+    No hole gets more than its capacity.
+
+    🎯 Goal: Maximize the number of mice saved (assigned to holes).
+
+
+🧠 3. How to Solve It: Algorithm Overview
+This is a maximum bipartite matching with capacities, solved by converting to a maximum flow problem.
+
+    🔁 Algorithm Steps:
+        Step 1: Create a flow network
+        Add a source node 
+        S and a sink node T.
+
+        Step 2: Connect nodes
+        From source  
+        S to each mouse: edge with capacity = 1 (mouse can be saved once).
+
+        From each mouse to the holes it can reach: edge with capacity = 1.
+
+        From each hole to sink 
+        T: edge with capacity = hole capacity.
+
+        Step 3: Run Edmonds-Karp (BFS-based Max Flow)
+        Keep finding augmenting paths until no more are left.
+
+    Total flow = number of mice saved.
+
+
+
