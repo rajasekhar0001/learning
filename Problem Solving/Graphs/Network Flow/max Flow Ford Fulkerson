@@ -18,8 +18,7 @@ To find max flow from source to sink node:
         Updating Residual Graph: Adjusting capacities after sending flow.
 
         Maximum Flow: Total flow from source to sink after no augmenting path exists.
-        
-
+    
 Ford-Fulkerson Algorithm: Simple Steps
 
     Start with zero flow
