@@ -1,0 +1,32 @@
+📘 Algorithm Steps
+    1. Build Level Graph using BFS
+        Start BFS from the source.
+
+        Assign levels to each node based on how far it is from the source.
+
+        Only consider edges with remaining capacity > 0.
+
+        If the sink is unreachable → stop, flow is maximized.
+
+    2. Send Blocking Flow using DFS
+        Use DFS to find paths from source to sink.
+
+        Only follow forward edges (to the next level).
+
+        Push as much flow as possible along those paths.
+
+        Use ptr[] to avoid retrying used-up edges.
+
+    3. Repeat
+        Repeat Steps 1 and 2 until no path from source to sink is found in BFS.
+
+
+⏱️ Time Complexity
+            Case	         Complexity
+
+    General Graph	         O(V² × E)
+    Bipartite Matching	     O(√V × E)
+    Unit Capacity Graph    	 O(min(V<sup>2/3</sup>, √E) × E)
+
+
+Note: Dinic’s is faster for large, dense graphs.

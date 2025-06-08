@@ -1,0 +1,6 @@
+
+
+Ford-Fulkerson (basic)	->  DFS (any path)	  ->  Worst case exponential
+Edmonds-Karp ->  BFS (shortest path) ->	O(V * E²) polynomial
+
+Capacity Scaling : O(E^2 logC),    ->  E: edges, C: max edge capacity
