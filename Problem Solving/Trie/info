@@ -9,3 +9,16 @@ Start With(word): To check if there is a string that has the prefix `word`.
 In other words, Trie is an information retrieval data structure, which can beat naive data structures like Hashmap, Tree, etc in the time complexity of its operations.
 
 Real time use: often used for autocomplete, spell checking, or prefix-based searching.
+
+
+Problem 2:
+
+Problem Statement: Implement a Trie data structure that supports the following methods:
+
+Insert (word): To insert a string `word` in the Trie.
+Count Words Equal To (word): Return the count of occurrences of the string word in the Trie.
+Count Words Starting With (prefix): Return the count of words in the Trie that have the string “prefix” as a prefix.
+Erase (word): Delete one occurrence of the string word from the Trie.
+
+Note:
+Release the memory associated with variables using dynamic memory allocation at the end of your solution.
