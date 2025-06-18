@@ -18,7 +18,7 @@ class Solution {
         // public:
         UnionBySize(int n) {
             parent.resize(n, 0);
-            size.resize(n, 0);
+            size.resize(n, 1); // Initiali size 1, including the node itself
             
             for (int i=0;i<n;i++) {
                 parent[i] = i;
@@ -36,6 +36,9 @@ class Solution {
         void unionBySize(int u, int v) {
             int ulp_u = findParent(u);
             int ulp_v = findParent(v);
+            
+            // If ulimate parents are same, present in same component
+            if (ulp_u == ulp_v) return;
             
             if (size[ulp_u] < size[ulp_v]) {
                 parent[ulp_u] = ulp_v;
