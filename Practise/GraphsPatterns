@@ -1,0 +1,168 @@
+
+🔹 1. Traversal Problems
+    These problems involve visiting all or some nodes of the graph.
+
+    Depth-First Search (DFS)
+
+    Breadth-First Search (BFS)
+
+    Examples:
+
+    Find connected components
+
+    Check if a path exists between two nodes
+
+    Maze solving
+
+🔹 2. Shortest Path Problems
+    These involve finding the path with the minimum cost/distance.
+
+    Dijkstra’s Algorithm – for non-negative weights
+
+    Bellman-Ford Algorithm – allows negative weights
+
+    Floyd-Warshall Algorithm – all pairs shortest path
+
+    A* Search – heuristic-based
+
+    Examples:
+
+        Shortest path in road maps
+
+    Flight routing
+
+    Pathfinding in games
+
+🔹 3. Minimum Spanning Tree (MST)
+    Used to find the minimum cost to connect all nodes.
+
+    Kruskal’s Algorithm
+
+    Prim’s Algorithm
+
+    Examples:
+
+    Network design (telecom, electrical grids)
+
+    Clustering
+
+🔹 4. Cycle Detection
+    Find if a graph contains any cycles.
+
+    DFS-based detection (for both directed and undirected graphs)
+
+    Union-Find (for undirected graphs)
+
+    Examples:
+
+    Deadlock detection
+
+    Detecting infinite loops in software
+
+🔹 5. Topological Sorting
+    Ordering of nodes in a Directed Acyclic Graph (DAG) such that for every edge u → v, u comes before v.
+
+    Kahn’s Algorithm (BFS-based)
+
+    DFS-based topological sort
+
+    Examples:
+
+    Task scheduling
+
+    Build systems (e.g., makefiles)
+
+    Course prerequisite planning
+
+🔹 6. Connectivity Problems
+    Check if nodes are connected or how strongly they are connected.
+
+    Connected components (Undirected Graph)
+
+    Strongly Connected Components (SCC) – Kosaraju's, Tarjan's algorithm
+
+    Examples:
+
+    Social networks (friend circles)
+
+    Communication networks
+
+🔹 7. Graph Coloring
+    Assign colors to vertices such that no two adjacent vertices have the same color.
+
+    Examples:
+
+    Register allocation
+
+    Map coloring
+
+    Sudoku solving
+
+🔹 8. Bipartite Graph Checking
+    Determine if a graph can be colored using 2 colors without adjacent nodes sharing the same color.
+
+    Examples:
+
+    Matching problems
+
+    Job assignments
+
+🔹 9. Matching & Flow Problems
+    Find maximum matches or flows between nodes.
+
+    Ford-Fulkerson, Edmonds-Karp (Max Flow)
+
+    Hungarian Algorithm (Assignment)
+
+    Hopcroft-Karp (Bipartite Matching)
+
+    Examples:
+
+    Job matching
+
+    Network traffic optimization
+
+    Sports tournaments
+
+🔹 10. Bridges and Articulation Points
+    Find edges/nodes whose removal increases the number of connected components.
+
+    Tarjan's Algorithm (DFS-based)
+
+    Examples:
+
+    Network reliability
+
+    Critical infrastructure analysis
+
+🔹 11. Eulerian and Hamiltonian Paths
+    Eulerian Path: Visit every edge once
+
+    Hamiltonian Path: Visit every node once
+
+    Examples:
+
+    Route inspection
+
+    Traveling salesman (variation)
+
+🔹 12. Grid-Based Graph Problems
+    Grids (2D or 3D) can be modeled as graphs where each cell is a node.
+
+    Examples:
+
+    Islands count (DFS/BFS)
+
+    Flood fill
+
+    Pathfinding (A*)
+
+🔹 13. Dynamic Graph Problems
+    Graphs that change over time (adding/removing edges or nodes).
+
+    Examples:
+
+    Dynamic connectivity
+
+    Online graph queries
+

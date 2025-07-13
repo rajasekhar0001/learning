@@ -3,7 +3,11 @@
         "future": "cpp",
         "iostream": "cpp",
         "stdint.h": "c",
-        "code": "cpp"
+        "code": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp"
     },
     "cmake.sourceDirectory": "/workspaces/learning/UTS_CPP"
 }
