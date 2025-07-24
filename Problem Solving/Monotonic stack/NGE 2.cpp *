@@ -1,0 +1,31 @@
+/**
+ * GFG
+ */
+
+class Solution {
+  public:
+    vector<int> nextLargerElement(vector<int> &nums) {
+        int n = nums.size();
+        vector<int> nge(n, -1);
+        stack<int> s;  // stack stores indices, not values
+
+        for (int i = 2 * n - 1; i >= 0; i--) {
+            int idx = i % n;
+
+            // Pop all elements from stack that are less than or equal to current value
+            while (!s.empty() && nums[s.top()] <= nums[idx]) {
+                s.pop();
+            }
+
+            // Fill result only during the first (original) pass
+            if (i < n) {
+                nge[idx] = s.empty() ? -1 : nums[s.top()];
+            }
+
+            // Push index instead of value
+            s.push(idx);
+        }
+
+        return nge;
+    }
+};
