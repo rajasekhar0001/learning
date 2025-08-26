@@ -1,0 +1,9 @@
+linking:
+
+1) Static linking:
+   .a files  -> Linux
+   .lib files -> Windows
+
+2) Dynamic Linking:
+    .so (shared object) files -> Linux
+    .dll (Dynamic Link Library) files-> Window
