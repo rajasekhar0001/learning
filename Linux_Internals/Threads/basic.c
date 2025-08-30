@@ -2,6 +2,11 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+/**
+    Any of the threads in the process calls exit(3), or the main thread performs a return from main().  This causes the
+          termination of all threads in the process.
+*/
+
 long tid;
 long tid_g;
 
@@ -22,6 +27,7 @@ int main() {
     tid = t1;
     printf("Main thread\n");
 
+    // Waits for t1 to complete its execution
     pthread_join(t1, NULL);  // check with and without
     printf("Outside cof created thread\n");
 
