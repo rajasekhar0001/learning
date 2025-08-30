@@ -17,6 +17,23 @@ Ex:
    from one thread to another in synchronisation.
 */
 
+/**
+ * 🔹 Why future and promise exist
+        Mutexes / locks / condition variables → help with shared state synchronization.
+        But sometimes you don’t want to share state — you just want to pass a result from one thread to another safely.
+        That’s where std::future and std::promise come in:
+
+        std::promise → a thread sets a value (or exception).
+        std::future → another thread retrieves that value, blocking until it’s ready.
+
+        They are essentially safe communication channels between threads.
+
+ *  ✅ Summary
+        Condition variable version: Verbose, lower-level, flexible.
+        Promise/Future version: Cleaner, less code, automatic synchronization.
+        Async version: Easiest — just fire and forget, wait for result.
+ */
+
 #include <iostream>
 #include <thread>
 #include <future>

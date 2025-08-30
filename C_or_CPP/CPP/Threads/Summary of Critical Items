@@ -1,0 +1,36 @@
+Thread synchronization:
+----------------------------------------
+    Thread synchronization- It refers to the concept where only one thread is executed 
+at a time while other threads are in the waiting state. This process is called thread 
+synchronization. It is used because it avoids interference of thread and the problem 
+of inconsistency.
+
+⚡ In simple words:
+Thread synchronization = coordinating threads when they depend on each other.
+If threads don’t share data or depend on each other → no synchronization needed.
+
+
+🔹 Synchronization Mechanisms
+
+    std::mutex → mutual exclusion, protects critical sections.
+
+    std::lock_guard → RAII wrapper, simple lock/unlock.
+
+    std::unique_lock → flexible lock, works with condition variables.
+
+    std::scoped_lock → C++17, locks multiple mutexes safely.
+
+    std::shared_mutex + std::shared_lock → multiple readers, single writer.
+
+    std::condition_variable → wait/notify threads, requires unique_lock.
+
+    std::atomic → lock-free, safe single variable updates.
+    
+
+🔹 Async Mechanisms
+
+    std::thread → run function concurrently.
+
+    std::promise + std::future → one thread sets value, another waits/gets it.
+
+    std::async → launch task asynchronously, returns future (handles threads for you).

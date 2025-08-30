@@ -6,7 +6,6 @@
    the main flow of execution.
 ---->>> Uses only future not promise
 
-
 /**
  * It runs a function asynchronously (potentially in new thread) and returns std::future that will
    will hold the result.
@@ -27,35 +26,34 @@ With the help of above policies std::async decides to create task as asynchronou
 using namespace std;
 
 
-unsigned long int  run(unsigned long int s, unsigned long int e){ 
+unsigned long int run(unsigned long int s, unsigned long int e){ 
     cout << "Thread ID in run : " << this_thread::get_id() << endl;
-    int sum = 0;
+    unsigned long int sum = 0;
     for (unsigned long int i=0;i<e;i++) {
-        sum += i;
+        sum += 1;
     }
+    this_thread::sleep_for(chrono::seconds(1));
     return sum;
 }
 
 int main() {
-    std::future<unsigned long int> fut = async(launch::deferred | launch::async, run, 0 , 9999999999);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               async(std::launch::deferred, run, 0, 99999999);  // future to be implemented when promise sets something
-    /**
-     * std::launch::deferred -> thread is not created, function gets called when fut.get()  executed -> synchronus
-                     -> works like normal function call
-     * std::launch::async -> thread is creatd instantly  -> asynchronous
-     * check thread ID's for understanding
-     * 
-     * std::launch::async | std::launch::deferred  -> It is similar to async, when not specified clearly
-    */
-   
-    cout << "Thread ID in main : " << this_thread::get_id() << endl;
-    cout << "waiting .............\n";
+  std::future<unsigned long int> fut = async(launch::deferred | launch::async, run, 0 , 100);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               async(std::launch::deferred, run, 0, 99999999);  // future to be implemented when promise sets something
+  /**
+   * std::launch::deferred -> thread is not created, function gets called when fut.get()  executed -> synchronus
+                   -> works like normal function call
+    * std::launch::async -> thread is creatd instantly  -> asynchronous
+    * check thread ID's for understanding
+    * 
+    * std::launch::async | std::launch::deferred  -> It is similar to async, when not specified clearly
+  */
+  
+  cout << "Thread ID in main : " << this_thread::get_id() << endl;
+  cout << "waiting .............\n";
 
-    // wait for result
-    // cout << "Result :  " << fut.get() << endl; // Here fut.get() calls run(), waits for return value in case of deferred launch
+  // wait for result
+  cout << "Result :  " << fut.get() << endl; // Here fut.get() calls run(), waits for return value in case of deferred launch
 
-    cout << "completed........\n";
-
-    
+  cout << "completed........\n";
 }
 
 

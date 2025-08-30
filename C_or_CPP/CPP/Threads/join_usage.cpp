@@ -18,16 +18,21 @@ void run(int x) {
     while (x-- > 0)
         cout << x << endl;
 
-    this_thread::sleep_for(chrono::seconds(3));  // this is to keep thread in sleep mode
+    this_thread::sleep_for(chrono::seconds(1));  // this is to keep thread in sleep mode
 }
 
 int main() {
-    thread t(run, 5);
+    thread t(run, 5); // THread creation with task assignment with arguments
     cout << "AFter creating thread\n";
     t.join();
     // If you have written 100's of lines here
     // you forgot like whether thread is joined or not you better to do like follwoing
-    if(t.joinable())
+    if(t.joinable()) {
         t.join();
+        cout << "Thread is joinable\n";
+    }
+    else {
+        cout << "Thread is not joinable, because already joined\n";
+    }
     cout << "Main() after join\n";
 }
