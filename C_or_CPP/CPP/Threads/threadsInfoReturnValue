@@ -1,0 +1,52 @@
+🔹 Returning values from a thread
+
+    Since std::thread itself doesn’t return a value, you use std::future + std::promise, or simpler, std::async.
+
+NOte:
+🔹 1. std::move in general
+
+    std::move is a cast that turns an object into an rvalue reference.
+    It does not actually move anything by itself. It just tells the compiler:
+
+    “This object can be moved from (resources transferred), don’t copy it.”
+🔹 2. Why std::move(promise) is needed
+
+    std::promise (and std::future) are non-copyable objects — they explicitly delete their copy constructor.
+    Reason: there must be exactly one producer (promise) and one consumer (future).
+
+
+
+Ex: (future + promise)
+#include <iostream>
+#include <thread>
+#include <future>
+
+void add(int a, int b, std::promise<int> resultPromise) {
+    resultPromise.set_value(a + b);  // send result back
+}
+
+int main() {
+    std::promise<int> p;
+    std::future<int> f = p.get_future();
+
+    std::thread t1(add, 3, 7, std::move(p));
+    t1.join();
+
+    std::cout << "Thread returned: " << f.get() << std::endl;
+    return 0;
+}
+
+EX: async
+
+#include <iostream>
+#include <future>
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    std::future<int> result = std::async(std::launch::async, add, 3, 7);
+    std::cout << "Thread returned: " << result.get() << std::endl;
+    return 0;
+}
