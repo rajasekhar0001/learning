@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-void * fun(void *data) {
+void* fun(void *data) {
 
     int d = *((int*)data);
     printf("data inside thread : %d\n", d);
@@ -22,7 +22,7 @@ void * fun(void *data) {
     // *ret = 100;
  
     // Hackway method
-    return (void*) (long) d;  // This is Hackway method -> mainly use of casting here
+    return &d;  // This is Hackway method -> mainly use of casting here
 
     // return ret;
 
@@ -40,5 +40,5 @@ int main() {
     int *ret;
     pthread_join(t1, (void**)&ret); // accepting return value from thread
 
-    printf("RET from thread : %ld\n", sizeof(ret));
+    printf("RET from thread : %ld, ret: %d\n", sizeof(ret), *ret);
 }
