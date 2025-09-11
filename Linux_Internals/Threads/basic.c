@@ -15,7 +15,6 @@ void *add(void *data) {
     for (int i=0;i < 20;i++) {
         printf("Inside thread\n");
     }
-
     return NULL;
 }
 

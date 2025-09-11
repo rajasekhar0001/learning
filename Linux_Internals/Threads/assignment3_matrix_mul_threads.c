@@ -123,7 +123,7 @@ int main() {
         pthread_create(&tid[i], NULL, mul, &obj[i]);
     }
     
-    p_tid = tid[2];
+    // p_tid = tid[2];
     
 
     for (int i=0;i<3;i++) {

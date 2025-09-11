@@ -1,5 +1,5 @@
 /**
- * // When a same thread going to lock the thread twice or more, the calling thread will go to the undefined waiting state
+ * // When a same thread going to lock the mutex twice or more, the calling thread will go to the undefined waiting state
         // That is called Deadlock
 
         -> the kind of action like dealock depends on kind of mutex, like fast or recursive, etc.
