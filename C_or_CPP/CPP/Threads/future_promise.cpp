@@ -17,23 +17,6 @@ Ex:
    from one thread to another in synchronisation.
 */
 
-/**
- * 🔹 Why future and promise exist
-        Mutexes / locks / condition variables → help with shared state synchronization.
-        But sometimes you don’t want to share state — you just want to pass a result from one thread to another safely.
-        That’s where std::future and std::promise come in:
-
-        std::promise → a thread sets a value (or exception).
-        std::future → another thread retrieves that value, blocking until it’s ready.
-
-        They are essentially safe communication channels between threads.
-
- *  ✅ Summary
-        Condition variable version: Verbose, lower-level, flexible.
-        Promise/Future version: Cleaner, less code, automatic synchronization.
-        Async version: Easiest — just fire and forget, wait for result.
- */
-
 #include <iostream>
 #include <thread>
 #include <future>
@@ -58,6 +41,14 @@ int main() {
 
     cout << "Thread created ssuccessfully\n";
     
+    /**
+     * Why move?
+        - Moving a promise transfers its internal shared state and ownership to the new object.
+        - After moving, the original promise is left in a valid but unspecified state (typically empty, no longer able
+          to set a value).
+        - This ensures there is exactly one owner responsible for fulfilling the promise.
+        - This enforces a single owner and avoids complex synchronization issues.
+     */
     thread t1(run, move(pro), 0, 999999999);
     /**
      * there are 2 ways to pass promise object to thread
