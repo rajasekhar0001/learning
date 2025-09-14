@@ -18,8 +18,9 @@ Requirements: -
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
 
 int main(int argc, char *argv[]) {
@@ -36,7 +37,7 @@ int main(int argc, char *argv[]) {
         //     sleep(1);
         // }
 
-        sleep(10);
+        sleep(2);
 
         if (argc <= 1) {
             printf("No arguments passed\n");
@@ -56,7 +57,7 @@ int main(int argc, char *argv[]) {
         wait(&status);
 
         if (WIFEXITED(status)) {
-            printf("Child terminated with exit status : %d\n", EEXITSTATUS(status));
+            printf("Child terminated with exit status : %d\n", WEXITSTATUS(status));
         }
 
         // Below loop block is  the alternative method but dont use that

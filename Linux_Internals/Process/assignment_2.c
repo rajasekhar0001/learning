@@ -37,6 +37,7 @@ int main()
 
     if (ret == 0)
     {
+        printf("Child process started\n");
         // child process
         int r = fork();
         if (r == 0)
@@ -49,12 +50,12 @@ int main()
 
             // To get the path where status of process is being stored
 
-            printf("child PID : %d\n", getpid());
-            printf("Path : %s\n", s_pid);
+            // printf("Grand child PID : %d\n", getpid());
+            // printf("Path : %s\n", s_pid);
             write(pipefd[1], s_pid, strlen(s_pid));
             for (long i = 0; i < 100000000; i++)
                 ;
-            sleep(1);
+            sleep(100);
         }
         else if (r > 0)
         {
@@ -65,30 +66,35 @@ int main()
             read(pipefd[0], s_pid, (size_t)len);
 
             printf("s_pid: %s\n", s_pid);
-            char str[19] = {0};
+            char str[30] = {0};
             strcat(str, "/proc/");
             strcat(str, (char *)s_pid);
             strcat(str, "/status");
 
-            printf("Path in parent :  %s\n", str);
+            printf("Path in parent : %s\n", str);
             write(pipefd[1], str, sizeof(str)); // Writing path to parent process via virtual pipe
             int readfd;
             readfd = open(str, O_RDONLY);
-            int i = 0;
-            while (i++ < 4)
-            {
-                char buf[100];
-                read(readfd, buf, 100);
-                char *s = strstr(buf, "State");
-                // *(s+ 15) = '\0';
-                buf[(s -buf)+20] ='\0';
-                printf("%d\n", s-buf);
-                printf("%s\n", buf);
-                sleep(1);
-                close(readfd);
-                readfd = open(str, O_RDONLY);
+            if (readfd == -1) {
+                perror("open in Child");
             }
-            close(readfd);
+            else {
+                int i = 0;
+                while (i++ < 4)
+                {
+                    char buf[100];
+                    read(readfd, buf, 100);
+                    char *s = strstr(buf, "State");
+                    // *(s+ 15) = '\0';
+                    buf[(s -buf)+20] ='\0';
+                    printf("%ld\n", s-buf);
+                    printf("%s\n", buf);
+                    sleep(1);
+                    close(readfd);
+                    // readfd = open(str, O_RDONLY);
+                }
+                close(readfd);
+            }
 
             printf("Process terminated\n");
         }
@@ -114,5 +120,5 @@ int main()
     {
         perror("fork");
     }
-    printf("utside of all processes\n");
+    printf("outside of all processes\n");
 }

@@ -1,4 +1,6 @@
-// not solved 
+/**
+ * Problem: Create a child process, do file operations read and write from different processes on same file
+ */
 #include <iostream>
 #include <stdlib.h>
 #include <unistd.h>
@@ -32,6 +34,7 @@ int main() {
         // parent process
         cout << "Parent process is running\n";
         string path;
+        sleep(2); // sleep for a while, so that child will create a file and write
         FILE *fptr = fopen("pid.txt", "r");
         int str;
         // sleep(10);
