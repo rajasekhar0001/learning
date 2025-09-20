@@ -1,10 +1,10 @@
 IPC using Message Queues:
 -> 4 important functions here are
     
-	msgget() -> used to create a message queue  
+	    msgget() -> used to create a message queue  
                   -> need to use in server and client  -> it returns message_queue_id
  
-        msgsnd() ->To add message to m  essage queue
+        msgsnd() ->To add message to message queue
                   -> returns '0' if it successfully sends
  
         msgrcv() -> to retrieve message from message queue
@@ -12,3 +12,16 @@ IPC using Message Queues:
                    
         msgctl() -> The control funciton (like to delete a message queue)
                   -> depends on Macros we use
+
+
+Feature	            Message Queue	                    Shared Memory
+
+Data format    	    Messages (structured)	            Raw memory region (unstructured)
+Speed	            Slower (kernel copies)	            Faster (direct memory access)
+Synchronization	    Built-in (queue ordering)	        Must be implemented manually
+Kernel involvement	High (copies each message)	        Low (only at setup)
+Best for	        Small/medium structured messages	Large volumes of raw data
+
+✅ In short:
+    Use message queues when you want structured, ordered, and safe communication.
+    Use shared memory when performance matters and you need to share large data, but you’re willing to handle synchronization yourself.

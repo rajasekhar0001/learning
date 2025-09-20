@@ -23,7 +23,7 @@ int main() {
         exit(0);
     }
     
-    sleep(10);
+    // sleep(10);
     // while (1) {
     //    / }
     
