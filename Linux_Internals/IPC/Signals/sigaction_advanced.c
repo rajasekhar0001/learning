@@ -18,7 +18,7 @@ void sigaction_handler(int signum, siginfo_t* info, void* uncontext) {
 int main() {
 
     struct sigaction act, old;
-    act.sa_flags = SA_SIGINFO;
+    act.sa_flags = SA_SIGINFO; // Purpose of thsi flag is to sent addition details like PID, etc. Details in info
     // act.sa_handler = sigaction_handler;
     // act.sa_sigaction = function with 3 arguments; // this line or previos line one has to be used not both
     act.sa_sigaction = sigaction_handler; 

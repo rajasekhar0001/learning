@@ -11,7 +11,7 @@
 #include <unistd.h>
 
 void handler (int signum) {
-    printf("SIGINT arrived\n");
+    printf("SIGINT arrived %d\n", signum);
     // signal(SIGINT, SIG_IGN);        // SIGINT signal is being ignored means no rsponse for SIGINT
 
     signal(SIGINT, SIG_DFL);  // SIG_DFL means signal default, 
