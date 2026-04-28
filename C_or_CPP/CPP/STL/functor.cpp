@@ -32,4 +32,4 @@ int main() {
 
     cout << count << endl;	// 1  (one instance of object created, remaining times multiplication happened) 
 
-}
+}q

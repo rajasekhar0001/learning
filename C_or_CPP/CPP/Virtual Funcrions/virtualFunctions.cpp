@@ -1,6 +1,35 @@
 // Virtual functions
 // Static binding and dynamic binding
 
+/**
+ * 
+ 🔹 2. How Does Dynamic Dispatch or Dynamic method dispatch (dynamic bi binding) Work Internally? (Virtual Table Mechanism)
+
+            When you use virtual functions, the compiler creates a hidden structure called a vtable
+            (short for virtual table), and each class with virtual functions has one.
+
+ 🧠 Conceptually:
+    vtable:
+        A table (array) of function pointers — one for each virtual function.
+
+    vptr:
+        Each object of such a class has a hidden pointer (vptr) that points to its class’s vtable.
+
+🔹 4. Notes About vtable
+
+    Created per class, not per object.
+    vptr (pointer to vtable) is added automatically by the compiler.
+    Exists only if the class has at least one virtual function.
+    virtual destructor ensures proper cleanup through base pointers.
+
+| Term                 | Meaning                                                                             |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| **vtable**           | Compiler-created table of virtual function addresses                                |
+| **vptr**             | Hidden pointer inside each object pointing to its class’s vtable                    |
+| **Dynamic Dispatch** | Process of calling the correct virtual function at runtime based on the object type |
+
+ */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -77,6 +106,10 @@ int main() {
         cout << "---------Verify Dynamic binding or Late binding--------\n";
         
         // Verify virtualShow method
+        /**
+         * Even though parentObj is a Parent*, C++ calls the Derived version Child —
+             --->> this is dynamic dispatch.
+         */
         parentObj->virtualShow();
         parentObj->show();
         

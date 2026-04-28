@@ -1,0 +1,38 @@
+✅ In one line:
+
+An inline function in C++ is a small function whose code is expanded at the call site to reduce function call overhead — but 
+the compiler decides whether to actually inline it.
+
+--> It’s like copy-pasting the function’s body wherever it’s used.
+
+
+🔹 Syntax
+
+    You can declare a function as inline in two ways:
+        ✅ 1. Inside the class definition (automatically inline means implicitly inline), If the fuction has defination
+            Note: If only declartion, definaton later, it is not considered as inline (Explicily you can make inline)
+        
+        ✅ 2. Using the inline keyword
+
+🔹 Purpose
+
+    The main goals of inline functions are:
+
+        🚀 Reduce function call overhead
+
+            Avoids pushing arguments to the stack and jumping to a new address.
+
+        ⚡ Faster execution for very short functions
+
+            Especially for getters/setters or small arithmetic utilities.
+
+🔹 When (and When Not) to Use
+✅ Use Inline	                                                     
+1. Very short, frequently called functions	                         
+2. Simple mathematical or accessor functions	                     
+3. Functions defined in headers (templates, class methods)	
+
+❌ Avoid Inline
+   Large or complex functions
+   Functions with loops, recursion, or static variables
+   When code size increase outweighs call overhead

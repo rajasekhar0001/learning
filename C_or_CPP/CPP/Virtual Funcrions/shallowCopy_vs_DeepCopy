@@ -1,0 +1,60 @@
+// Below concept is only applicable for class objects where class might has pointer members (Not for pointers objects)
+
+🔹 Shallow Copy
+
+    Copies all member variables of an object bit by bit.
+    If the class contains pointers, the copied object’s pointer points to the same memory as the original.
+    Both objects share the same data → changing one affects the other.
+    Can cause double deletion if both try to free the same memory.
+
+🔹 Deep Copy
+
+    Copies all data including dynamically allocated memory.
+    Each object gets its own separate copy of the data.
+    Safe and independent — no shared memory.
+
+
+| Feature                  | **Shallow Copy**             | **Deep Copy**     |
+| ------------------------ | ---------------------------- | ----------------- |
+| Memory Allocation        | Shared                       | Separate          |
+| Pointer Members          | Point to same memory         | Copy new memory   |
+| Default Copy Constructor | Yes                          | No (user-defined) |
+| Independence             | No                           | Yes               |
+| Risk                     | Double free, data corruption | None              |
+
+
+Note: In C++, if your class contains pointers (or any dynamically allocated resources), and you want a deep copy, then you must define your own copy constructor (and often assignment operator) to implement that behavior yourself.
+
+Note:  For shallow copy, explicit copy constructor is not required
+Ex: for Deep copy,
+
+#include <iostream>
+using namespace std;
+
+class A {
+    int* data;
+public:
+    // Normal constructor
+    A(int val) {
+        data = new int(val);
+    }
+
+    // Deep copy constructor
+    A(const A& obj) {
+        data = new int(*obj.data);   // allocate new memory and copy value
+    }
+
+    // Show method
+    void show() { cout << *data << endl; }
+
+    ~A() {
+        delete data;
+        cout << "Destructor called\n";
+    }
+};
+
+int main() {
+    A a1(10);
+    A a2 = a1;    // calls deep copy constructor
+    a2.show();
+}

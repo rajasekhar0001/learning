@@ -26,6 +26,7 @@ using namespace std;
         name ="sekhar";
         cout << "Inside lambda"<< endl;
     });
+    std::this_thread::sleep_for(Std::chrono::milliseconds(100));
 }  // lambda block is executed for all the values in vector
 // We need to include "algorithm" header file which has functions like "for_Each()"
 
