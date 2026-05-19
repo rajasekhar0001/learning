@@ -1,0 +1,80 @@
+Interface header:
+
+#include <binder/IInterface.h>
+#include <binder/Parcel.h>
+#include <utils/RefBase.h>
+
+
+class ICallService : public android::IInterface {
+	virtual void dial(const std::string &number, const int32_t callType, const TelephonyManager::SlotIdType slotId = TelephonyManager::SlotIdType::DEFAULT_ID) = 0;
+}
+
+class BpCallService : public android::BpInterface<ICallService> {
+	virtual void dial(const std::string &number, const int32_t callType, const TelephonyManager::SlotIdType slotId) override;
+}
+
+class BnCallService : public android::BnInterface<ICallService> {
+	android::status_t dialInternal(const android::Parcel &data, android::Parcel *reply);
+}
+
+
+Source file:
+Includeds definations for the virtual functions in BpCallService and BnCallService
+
+void BpCallService::dial(const std::string &number, const int32_t callType, const TelephonyManager::SlotIdType slotId)
+{
+    android::Parcel data;
+    android::Parcel reply;
+    (void)data.writeInterfaceToken(ICallService::getInterfaceDescriptor());
+    StrUtils::writeStringToParcel(data, number);
+    (void)data.writeInt32(callType);
+    (void)data.writeUint32(static_cast<uint32_t>(slotId));
+    if (remote()->transact(TRANSACTION_dial, data, &reply) != android::NO_ERROR)
+    {
+        TLOG(TERROR, kLogTag, __func__, " could not contact remote");
+        return;
+    }
+    auto err = reply.readExceptionCode();
+    if (err < 0)
+    {
+        TLOG(TERROR, kLogTag, __func__, " caught exception ",  err);
+        return;
+    }
+}
+	
+transact() goes to onTransact() method in BnInterface
+
+android::status_t BnCallService::onTransact(uint32_t code, const android::Parcel &data, android::Parcel *reply, uint32_t flags)
+{
+	static const std::array<Handler_t, 51> kTransactionFunction {{
+            {TRANSACTION_dial, &BnCallService::dialInternal}
+		}
+	
+	auto itr = std::find_if(kTransactionFunction.begin(), kTransactionFunction.end(),
+                            [&code](const Handler_t& hdlr){return hdlr.id == code;});
+    if (itr != kTransactionFunction.end())
+    {
+        CHECK_INTERFACE(ICallService, data, reply);
+        return (this->*(itr->handler))(data, reply);
+    }
+    return android::BBinder::onTransact(code, data, reply, flags);
+}
+
+onTransact calls below method dialInetrnal based on transaction id
+	
+android::status_t BnCallService::dialInternal(const android::Parcel &data, android::Parcel *reply)
+{
+    auto number = StrUtils::readStringFromParcel(data);
+    auto callType = data.readInt32();
+    auto nSlotId = data.readUint32();
+    if (nSlotId >= static_cast<uint32_t>(TelephonyManager::SlotIdType::SLOT_MAX))
+    {
+        return android::BAD_VALUE;
+    }
+    auto slotId = static_cast<TelephonyManager::SlotIdType>(nSlotId);
+    dial(number, callType, slotId); // calls the API in CallInterfaceManager class which inherits BnCallService
+    (void)reply->writeNoException();
+    return android::NO_ERROR;
+}
+
+InterfaceManager -> SyncHandler -> service classes
