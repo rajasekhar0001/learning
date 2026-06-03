@@ -1,0 +1,10 @@
+Observer Design Pattern: How to Stay Updated Without Constantly Checking 📲🔔:
+
+
+Imagine you’re watching your favorite YouTube channel. Every time they upload a new video, you get a notification. You don’t have to keep checking the channel to see if there’s something new. Instead, you get notified automatically when they post. This is exactly how the Observer Design Pattern works in software.
+
+‍
+
+In programming, the Observer Pattern allows one object (the subject) to notify other objects (the observers) whenever there is a change in its state. This is great for systems where certain parts of your application need to stay updated in real-time but shouldn’t be tightly coupled to each other.
+
+‍
